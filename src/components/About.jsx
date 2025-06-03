@@ -38,7 +38,7 @@ const About = () => {
           users.
         </p>
 
-        <p className="text-[1.2rem] md:text-[1.2rem] text-gray-300 font-['Montserrat'] ">
+        <p className="text-[1.2rem] md:text-[1.2rem] text-gray-300 font-['Montserrat'] md:pb-0 pb-7">
           Looking for a top-notch web developer to revamp your website or web
           Apps? Look no further than Gabriel Steven. With years of experience
           and a keen eye for design, Steve can take your site or app to the next
