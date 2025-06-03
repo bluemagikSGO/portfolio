@@ -17,13 +17,13 @@ const About = () => {
           />
 
           <div className="absolute bottom-0 flex justify-between w-[100%] gap-5  text-2xl p-3">
-            <div>
+            <div className="active:text-red-500">
               <Instagram size={35} />
             </div>
-            <div>
+            <div className="active:text-red-500">
               <Twitter size={35} />
             </div>
-            <div>
+            <div className="active:text-red-500">
               <Youtube size={35} />
             </div>
           </div>
