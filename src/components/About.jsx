@@ -9,11 +9,11 @@ const About = () => {
       className="h-screen md:flex md:flex-row flex flex-col md:px-[10rem] bg-[#0b043a] text-white md:gap-9 items-center justify-center "
     >
       <div className="flex md:w-[40%] md:py-35 ">
-        <div className="relative bg-[#1b1448] md:w-[80%] w-[97%] md:h-[430px] h-[400px] border-1 border-blue-100 py-3 rounded-md">
+        <div className="relative bg-[#1b1448] md:w-[80%] w-[97%] md:h-[430px] h-[350px] border-1 border-blue-100 py-3 rounded-md">
           <img
             src={enhancedImage}
             alt="image"
-            className="w-[320px] h-[340px] md:absolute left-6 p-3 md:p-0 transition-all duration-1000 hover:scale-[1.1] cursor-pointer"
+            className="w-[320px] md:h-[340px] h-[290px] md:absolute left-6 p-3 md:p-0 transition-all duration-1000 hover:scale-[1.1] cursor-pointer"
           />
 
           <div className="absolute bottom-0 flex justify-between w-[100%] gap-5  text-2xl p-3">
@@ -38,7 +38,7 @@ const About = () => {
           users.
         </p>
 
-        <p className="text-[1rem] md:text-[1.2rem] text-gray-300 font-['Montserrat'] ">
+        <p className="text-[1.2rem] md:text-[1.2rem] text-gray-300 font-['Montserrat'] ">
           Looking for a top-notch web developer to revamp your website or web
           Apps? Look no further than Gabriel Steven. With years of experience
           and a keen eye for design, Steve can take your site or app to the next
