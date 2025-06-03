@@ -5,7 +5,7 @@ const PortList = ({ image, imageAlt, category, title }) => {
     <div>
       <img src={image} alt={imageAlt} />
       <p className="p-8 text-lg font-['Ubuntu']  text-gray-300">{category}</p>
-      <p className="pl-8 pb-8 md:text-5xl text-3xl font-bold font-['Montserrat']">
+      <p className="pl-8 pb-4 md:text-5xl text-3xl font-bold font-['Montserrat']">
         {title}
       </p>
     </div>
