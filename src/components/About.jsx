@@ -6,7 +6,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="h-screen md:flex md:flex-row flex flex-col md:px-[10rem] bg-[#0b043a] text-white md:gap-9 items-center justify-center "
+      className="h-screen md:flex md:flex-row flex flex-col md:px-[10rem] bg-[#0b043a] text-white md:gap-9 items-center justify-center md:pt-0 pt-15"
     >
       <div className="flex md:w-[40%] md:py-35 ">
         <div className="relative bg-[#1b1448] md:w-[80%] w-[97%] md:h-[430px] h-[350px] border-1 border-blue-100 py-3 rounded-md">
@@ -31,7 +31,7 @@ const About = () => {
       </div>
 
       <div className="flex md:w-[60%]  flex-col gap-7 justify-center items-center p-6">
-        <p className="md:text-[2.2rem] text-[1.5rem] font-semibold font-['Ubuntu']">
+        <p className="md:text-[2.2rem] text-[1.3rem] font-semibold font-['Ubuntu']">
           I’m Gabriel Steven. I am passionate about crafting exceptional
           websites and web applications. With a blend of design skills and
           coding expertise, I create unique online experiences that captivate
