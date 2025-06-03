@@ -115,7 +115,7 @@ const Hero = () => {
           </div>
           <div className="mt-8 text-lg font-sans font-semibold">
             Expert development services by Nigeria-based freelancer for your
-            website needs.
+            website and web app needs.
           </div>
           <div className="leading-normal mt-8 space-x-4">
             <button className="border-1 px-[1.5rem] py-[0.8rem] text-black bg-white hover:bg-transparent hover:text-white transition-all duration-500 font-semibold">
