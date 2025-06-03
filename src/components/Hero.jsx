@@ -1,5 +1,8 @@
 import { GlobeLock } from "lucide-react";
 import { Menu, X } from "lucide-react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+AOS.init();
 
 import React, { useState } from "react";
 import { Link } from "react-scroll";
@@ -109,7 +112,12 @@ const Hero = () => {
           </div>
         )}
 
-        <section className="text-white relative z-10 flex flex-col items-center justify-center h-[40rem]  text-center px-3">
+        <section
+          data-aos="zoom-out"
+          data-aos-duration="1000"
+          data-aos-easing="ease-in-out"
+          className="text-white relative z-10 flex flex-col items-center justify-center h-[40rem]  text-center px-3"
+        >
           <div className="text-6xl font-bold  leading-16 md:w-[50rem] font-['Montserrat']">
             Freelance web developer based in Lagos Nigeria
           </div>
