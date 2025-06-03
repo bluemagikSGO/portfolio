@@ -7,7 +7,10 @@ const Portfolio = () => {
   return (
     <section id="portfolio" className="h-screen bg-[#0b043a] text-white">
       <hr className="mx-15" />
-      <div className="md:flex md:space-y-0 space-y-10 gap-10 md:p-12 p-6 md:mt-0 mt-12">
+      <p className="text-center text-2xl font-['Montserrat'] pt-10">
+        Portfolio
+      </p>
+      <div className="md:flex md:space-y-0 space-y-10 gap-10 md:p-12 p-6 md:mt-0 mt-6">
         <div className="md:w-1/2 border-1">
           <PortList
             image={portimg}
