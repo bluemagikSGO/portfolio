@@ -33,9 +33,12 @@ const Hero = () => {
                 </li>
               </Link>
 
-              <li className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer">
-                Portfolio
-              </li>
+              <Link to="portfolio" smooth={true} duration={500}>
+                <li className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer">
+                  Portfolio
+                </li>
+              </Link>
+
               <li className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer">
                 Services
               </li>
@@ -82,15 +85,17 @@ const Hero = () => {
                     About
                   </li>
                 </Link>
+                <Link to="portfolio" smooth={true} duration={500}>
+                  <li
+                    className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer border-b-2 pl-9 pb-4"
+                    onClick={() => {
+                      setMenu(false);
+                    }}
+                  >
+                    Portfolio
+                  </li>
+                </Link>
 
-                <li
-                  className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer border-b-2 pl-9 pb-4"
-                  onClick={() => {
-                    setMenu(false);
-                  }}
-                >
-                  Portfolio
-                </li>
                 <li
                   className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer border-b-2 pl-9 pb-4"
                   onClick={() => {
