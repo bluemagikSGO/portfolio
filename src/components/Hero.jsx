@@ -90,7 +90,7 @@ const Hero = () => {
         )}
 
         <section className="text-white relative z-10 flex flex-col items-center justify-center h-[40rem]  text-center px-3">
-          <div className="text-6xl font-bold  leading-snug md:w-[50rem] font-['Montserrat']">
+          <div className="text-6xl font-bold   md:w-[50rem] font-['Montserrat']">
             Freelance web developer based in Lagos Nigeria
           </div>
           <div className="mt-8 text-lg font-sans font-semibold">
