@@ -74,7 +74,7 @@ const Hero = () => {
         {menu && (
           <div className="relative">
             <div className="absolute md:hidden w-full z-50">
-              <ul className="flex flex-col text-lg font-semibold text-gray-300  bg-[#1b1448] gap-9 pt-8 transition-all duration-300 font-['Ubuntu']">
+              <ul className="flex flex-col text-lg font-semibold text-gray-300  bg-[#211c3f] gap-9 pt-8 transition-all duration-300 font-['Ubuntu']">
                 <Link to="about" smooth={true} duration={500}>
                   <li
                     className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer border-b-2 pl-9 pb-4"

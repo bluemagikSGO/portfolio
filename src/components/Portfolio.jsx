@@ -5,8 +5,8 @@ import portsport from "../assets/sportsloc.jpg";
 
 const Portfolio = () => {
   return (
-    <section id="portfolio" className="h-fit bg-[#0b043a] text-white">
-      <hr className="mx-15" />
+    <section id="portfolio" className="h-fit  text-white">
+      <hr className="mx-15 mt-10" />
       <p className="text-center text-2xl font-['Montserrat'] pt-10">
         Portfolio
       </p>
