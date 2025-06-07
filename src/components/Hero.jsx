@@ -40,16 +40,13 @@ const Hero = () => {
               </Link>
 
               <li className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer">
-                Services
-              </li>
-              <li className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer">
                 Testimonials
               </li>
             </ul>
           </div>
           <div>
             <button className="border-1 px-[1.5rem] py-[0.8rem] text-white hover:bg-white hover:text-black transition-all duration-500 font-semibold">
-              Let's Connect
+              Download CV
             </button>
           </div>
         </nav>
@@ -102,7 +99,7 @@ const Hero = () => {
                     setMenu(false);
                   }}
                 >
-                  Services
+                  Testimonials
                 </li>
                 <li
                   className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer border-b-2 pl-9 pb-4"
@@ -110,7 +107,9 @@ const Hero = () => {
                     setMenu(false);
                   }}
                 >
-                  Testimonials
+                  <button className="border-1 px-[1rem] py-[0.4rem] text-white hover:bg-white hover:text-black transition-all duration-500 font-semibold active:text-red-500">
+                    Download CV
+                  </button>
                 </li>
               </ul>
             </div>
@@ -134,9 +133,11 @@ const Hero = () => {
             <button className="border-1 px-[1.5rem] py-[0.8rem] text-black bg-white hover:bg-transparent hover:text-white transition-all duration-500 font-semibold">
               Let's Connect
             </button>
-            <button className="border-1 px-[1.5rem] py-[0.8rem] text-white hover:bg-white hover:text-black transition-all duration-500 font-semibold">
-              Check My Works
-            </button>
+            <Link to="portfolio" smooth={true} duration={500}>
+              <button className=" border-1 px-[1.5rem] py-[0.8rem] text-white hover:bg-white hover:text-black transition-all duration-500 font-semibold">
+                Check My Works
+              </button>
+            </Link>
           </div>
         </section>
       </div>
