@@ -3,6 +3,7 @@ import TestimonialList from "./TestimonialList";
 import test1 from "../assets/therapist1.jpg";
 import test2 from "../assets/therapist2.jpg";
 import test3 from "../assets/therapist4.jpg";
+import { Copyright } from "lucide-react";
 
 const Testimonials = () => {
   return (
@@ -28,6 +29,10 @@ const Testimonials = () => {
           image={test3}
         />
       </div>
+      <hr className="mx-15 mt-10" />
+      <footer className="flex gap-4 items-center justify-center mt-10">
+        <Copyright /> CopyRight 2025
+      </footer>
     </div>
   );
 };
