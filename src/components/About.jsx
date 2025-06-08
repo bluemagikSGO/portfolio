@@ -1,5 +1,5 @@
 import React from "react";
-import { Instagram, Twitter, Youtube, X, Linkedin } from "lucide-react";
+import { Mail, Twitter, Youtube, X, Linkedin } from "lucide-react";
 import enhancedImage from "../assets/steven.png";
 
 const About = () => {
@@ -16,9 +16,9 @@ const About = () => {
             className="w-[320px] md:h-[340px] h-[290px] md:absolute left-6 p-3 md:p-0 transition-all duration-1000 hover:scale-[1.1] cursor-pointer"
           />
 
-          <div className="absolute bottom-0 flex justify-between w-[100%] gap-5  text-2xl p-3">
+          <div className="absolute bottom-0 flex justify-between w-[100%] gap-5  text-2xl p-3 cursor-pointer">
             <div className="hover:text-red-500 active:text-red-500">
-              <Instagram size={35} />
+              <Mail size={35} />
             </div>
             <div className="hover:text-red-500 active:text-red-500">
               <Twitter size={35} />
