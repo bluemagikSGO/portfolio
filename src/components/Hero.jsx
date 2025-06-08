@@ -38,10 +38,11 @@ const Hero = () => {
                   Portfolio
                 </li>
               </Link>
-
-              <li className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer">
-                Testimonials
-              </li>
+              <Link to="testimonial" smooth={true} duration={500}>
+                <li className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer">
+                  Testimonials
+                </li>
+              </Link>
             </ul>
           </div>
           <div>
@@ -92,15 +93,16 @@ const Hero = () => {
                     Portfolio
                   </li>
                 </Link>
-
-                <li
-                  className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer border-b-2 pl-9 pb-4"
-                  onClick={() => {
-                    setMenu(false);
-                  }}
-                >
-                  Testimonials
-                </li>
+                <Link to="testimonial" smooth={true} duration={500}>
+                  <li
+                    className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer border-b-2 pl-9 pb-4"
+                    onClick={() => {
+                      setMenu(false);
+                    }}
+                  >
+                    Testimonials
+                  </li>
+                </Link>
                 <li
                   className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer border-b-2 pl-9 pb-4"
                   onClick={() => {

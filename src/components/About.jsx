@@ -1,5 +1,5 @@
 import React from "react";
-import { Instagram, Twitter, Youtube, X } from "lucide-react";
+import { Instagram, Twitter, Youtube, X, Linkedin } from "lucide-react";
 import enhancedImage from "../assets/steven.png";
 
 const About = () => {
@@ -25,6 +25,9 @@ const About = () => {
             </div>
             <div className="hover:text-red-500 active:text-red-500">
               <Youtube size={35} />
+            </div>
+            <div className="hover:text-red-500 active:text-red-500">
+              <Linkedin size={35} />
             </div>
           </div>
         </div>
