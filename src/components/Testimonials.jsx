@@ -18,12 +18,12 @@ const Testimonials = () => {
           image={test2}
         />
         <TestimonialList
-          comment='"A good frontend developer with a creative eyes for simplified UX, I enjoy working with Steve"'
+          comment='"A good frontend developer with creative eyes for simplified UX, I enjoy working with Steve"'
           clientName="Seyifunmi"
           image={test1}
         />
         <TestimonialList
-          comment='"A friend recommended Steve and i must confess, I wish i had known him a while ago. My projects are done exactly to my taste with the right attention to details needed for a frontend developer, highly recommended"'
+          comment='"A friend recommended Steve and i must confess, I wish i had known him a while ago. My projects are done exactly to my taste with the right attention to details needed by a frontend developer, highly recommended"'
           clientName="Ruben"
           image={test3}
         />
