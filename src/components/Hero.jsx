@@ -16,7 +16,7 @@ const Hero = () => {
   };
   return (
     <div>
-      <div className="relative h-screen bg-[url('assets/background.jpg')] bg-cover z-10">
+      <div className="relative h-fit bg-[url('assets/background.jpg')] bg-cover z-10">
         <div className="absolute inset-0 bg-black opacity-70 z-0"></div>
         <nav className="relative md:flex justify-between px-[10rem] pt-[2rem] items-center z-10 hidden">
           <div className="text-3xl font-bold text-white">
