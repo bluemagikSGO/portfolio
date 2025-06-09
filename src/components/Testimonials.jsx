@@ -30,8 +30,10 @@ const Testimonials = () => {
         />
       </div>
       <hr className="mx-15 mt-10" />
+      <div className="text-center">stevengabriel2015@gmail.com</div>
       <footer className="flex gap-4 items-center justify-center mt-10">
-        <Copyright /> CopyRight 2025
+        <Copyright /> {new Date().getFullYear()} All Rights Reserved Gabriel
+        Steven O
       </footer>
     </div>
   );

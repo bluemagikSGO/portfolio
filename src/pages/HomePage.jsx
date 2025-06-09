@@ -4,10 +4,11 @@ import About from "../components/About";
 import Portfolio from "../components/Portfolio";
 import Counter from "../components/Counter";
 import Testimonials from "../components/Testimonials";
+import Metherappy from "./Metherappy";
 
 const HomePage = () => {
   return (
-    <div>
+    <div id="homepage">
       <Hero />
       <About />
       <Portfolio />
