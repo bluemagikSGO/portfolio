@@ -14,7 +14,7 @@ const Metherappy = () => {
   return (
     <div
       id="metherappy"
-      className="min-h-screen text-white font-['Montserrat']"
+      className="min-h-screen text-white font-['Montserrat'] pb-15"
     >
       {/* Hero Section */}
       <section className="flex flex-col items-center py-12 px-4">
