@@ -18,10 +18,17 @@ const About = () => {
 
           <div className="absolute bottom-0 flex justify-between w-[100%] gap-5  text-2xl p-3 cursor-pointer">
             <div className="hover:text-red-500 active:text-red-500">
-              <Mail size={35} />
+              <Mail
+                size={35}
+                onClick={() => {
+                  alert("stevengabriel2015@gmail.com");
+                }}
+              />
             </div>
             <div className="hover:text-red-500 active:text-red-500">
-              <Twitter size={35} />
+              <a href="https://x.com/bluemagikSGO" target="blank">
+                <Twitter size={35} />
+              </a>
             </div>
             <div className="hover:text-red-500 active:text-red-500">
               <Youtube size={35} />
