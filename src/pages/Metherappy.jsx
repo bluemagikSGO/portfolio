@@ -1,16 +1,14 @@
 import React from "react";
 import portimg from "../assets/metherappy.jpg";
-// Example images (replace with your actual image paths)
-// import heroMockup from "../assets/metherappy-hero.png";
+
 import dashboardImg from "../assets/dashbordImg.png";
 import loginImg from "../assets/loginImg.png";
 import bookingImg from "../assets/bookingImg.png";
+import code1 from "../assets/code1.png";
+import code2 from "../assets/code2.png";
+import code3 from "../assets/code3.png";
 import { Copyright } from "lucide-react";
 import { Link } from "react-router-dom";
-// import reactLogo from "../assets/react-logo.svg";
-// import tailwindLogo from "../assets/tailwind-logo.svg";
-// import firebaseLogo from "../assets/firebase-logo.svg";
-// import vercelLogo from "../assets/vercel-logo.svg";
 
 const Metherappy = () => {
   return (
@@ -65,13 +63,13 @@ const Metherappy = () => {
       </section>
 
       {/* My Role & Responsibilities */}
-      <section className="max-w-4xl mx-auto py-8 px-4 grid md:grid-cols-2 gap-8">
+      <section className="max-w-4xl mx-auto py-8 px-4 grid md:grid-cols-2 gap-8 md:pl-20">
         <div>
           <h2 className="text-2xl font-bold  mb-4">
             My Role & Responsibilities
           </h2>
           <ul className="space-y-3">
-            <li>🔧 Frontend Development (React, Tailwind)</li>
+            <li>🔧 Frontend Development</li>
             <li>🧠 UX/UI Design</li>
             <li>🗄️ Backend Collaboration</li>
             <li>🧪 Testing & Deployment</li>
@@ -102,7 +100,7 @@ const Metherappy = () => {
       </section>
 
       {/* Screenshots / Demo Gallery */}
-      <section className="max-w-5xl mx-auto py-8 px-4">
+      <section className="max-w-8xl mx-auto py-8 px-4">
         <h2 className="text-2xl font-bold  mb-4">Screenshots</h2>
         <div className="grid md:grid-cols-3 gap-6">
           <img
@@ -115,6 +113,21 @@ const Metherappy = () => {
             src={bookingImg}
             alt="Booking Page"
             className="rounded-lg shadow"
+          />
+          <img
+            src={code1}
+            alt="code1"
+            className="rounded-lg shadow h-64 w-130"
+          />
+          <img
+            src={code2}
+            alt="code2"
+            className="rounded-lg shadow h-64 w-130"
+          />
+          <img
+            src={code3}
+            alt="code3"
+            className="rounded-lg shadow h-64 w-130"
           />
         </div>
       </section>
@@ -152,7 +165,7 @@ const Metherappy = () => {
           🔗 Live Demo
         </a>
         <a
-          href="https://github.com/yourusername/metherappy"
+          href="https://github.com/bluemagikSGO/meTherappy.git"
           target="_blank"
           rel="noopener noreferrer"
           className="underline "
