@@ -32,7 +32,7 @@ const Metherappy = () => {
             className="w-80 md:w-[420px] rounded-xl shadow-lg border"
           />
         </div>
-        <div className="flex gap-4">
+        <div className="">
           <a
             href="https://metherappy.com"
             target="_blank"
@@ -40,14 +40,6 @@ const Metherappy = () => {
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold shadow"
           >
             View Live
-          </a>
-          <a
-            href="/case-study-metherappy.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-white border  text-black px-6 py-2 rounded-lg font-semibold shadow"
-          >
-            Case Study
           </a>
         </div>
       </section>
@@ -171,14 +163,6 @@ const Metherappy = () => {
           className="underline "
         >
           📦 GitHub Repo
-        </a>
-        <a
-          href="/case-study-metherappy.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline "
-        >
-          📝 Case Study PDF
         </a>
       </section>
 
