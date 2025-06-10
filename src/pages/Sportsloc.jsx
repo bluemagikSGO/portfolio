@@ -14,7 +14,7 @@ const Sportsloc = () => {
         {/* Hero Section */}
         <section className="flex flex-col items-center py-12 px-4">
           <h1 className="text-4xl md:text-5xl font-bold  mb-4 text-center">
-            SportLoc
+            SportsLoc
           </h1>
           <p className="text-lg md:text-xl  mb-6 text-center max-w-2xl">
             A sport center and facility location discovery platform that also
