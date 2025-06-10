@@ -2,6 +2,9 @@ import { GlobeLock } from "lucide-react";
 import { Menu, X } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import emailjs from "@emailjs/browser";
+import { useRef } from "react";
+
 AOS.init();
 
 import React, { useState } from "react";
@@ -10,10 +13,47 @@ import cv from "/public/gstevenCV.pdf";
 
 const Hero = () => {
   const [menu, setMenu] = useState(false);
+  const [showModal, setShowModal] = useState(false); // Modal state
+  const formRef = useRef();
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
   const toggled = () => {
     setMenu(!menu);
   };
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // form handling
+
+    emailjs
+      .sendForm(
+        "service_56vf85l", // Replace with your EmailJS Service ID
+        "template_7up3rad", // Replace with your EmailJS Template ID
+        formRef.current,
+        "rX-Q7uQmFYKniQDoU" // Replace with your Public Key
+      )
+      .then(
+        (result) => {
+          alert("Message sent and delivered!");
+          setShowModal(false);
+          setForm({ name: "", email: "", message: "" });
+        },
+        (error) => {
+          console.log(error.text);
+          alert("Failed to send message, please try again.");
+        }
+      );
+  };
+
   return (
     <div>
       <div className="relative h-fit bg-[url('assets/background.jpg')] bg-cover z-10">
@@ -137,7 +177,10 @@ const Hero = () => {
             website and web app needs.
           </div>
           <div className="leading-normal mt-8 space-x-4">
-            <button className="border-1 px-[1.5rem] py-[0.8rem] text-black bg-white hover:bg-transparent hover:text-white transition-all duration-500 font-semibold">
+            <button
+              className="border-1 px-[1.5rem] py-[0.8rem] text-black bg-white hover:bg-transparent hover:text-white transition-all duration-500 font-semibold"
+              onClick={() => setShowModal(true)}
+            >
               Let's Connect
             </button>
             <Link to="portfolio" smooth={true} duration={500}>
@@ -147,6 +190,60 @@ const Hero = () => {
             </Link>
           </div>
         </section>
+
+        {/* Contact Modal */}
+        {showModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+            <div className="bg-white rounded-lg p-8 w-full max-w-sm shadow-lg relative font-['Montserrat']">
+              <button
+                className="absolute top-2 right-3 text-gray-500 hover:text-red-500 text-2xl"
+                onClick={() => setShowModal(false)}
+                aria-label="Close"
+              >
+                &times;
+              </button>
+              <h2 className="text-2xl font-bold mb-4 text-center text-black">
+                Contact Me
+              </h2>
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Full Name"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <textarea
+                  name="message"
+                  placeholder="Your Message"
+                  value={form.message}
+                  onChange={handleChange}
+                  required
+                  rows={4}
+                  className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <button
+                  type="submit"
+                  className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 font-semibold"
+                >
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
+        {/* ...existing code... */}
       </div>
     </div>
   );
