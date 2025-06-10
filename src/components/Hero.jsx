@@ -56,13 +56,67 @@ const Hero = () => {
 
   return (
     <div>
+      {/* Contact Modal */}
+      {showModal && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center">
+          <div className="absolute inset-0 bg-black bg-opacity-70"></div>
+          <div className="bg-gray-300 rounded-lg p-8 w-full max-w-sm shadow-lg relative font-['Montserrat'] z-10">
+            <button
+              className="absolute top-2 right-3 text-gray-500 hover:text-red-500 text-2xl"
+              onClick={() => setShowModal(false)}
+              aria-label="Close"
+            >
+              &times;
+            </button>
+            <h2 className="text-2xl font-bold mb-4 text-center text-black">
+              Contact Me
+            </h2>
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+              <input
+                type="text"
+                name="name"
+                placeholder="Full Name"
+                value={form.name}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={form.email}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                value={form.message}
+                onChange={handleChange}
+                required
+                rows={4}
+                className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <button
+                type="submit"
+                className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 font-semibold"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
       <div className="relative h-fit bg-[url('assets/background.jpg')] bg-cover z-10">
         <div className="absolute inset-0 bg-black opacity-70 z-0"></div>
         <nav className="relative md:flex justify-between px-[10rem] pt-[2rem] items-center z-10 hidden">
           <div className="text-3xl font-bold text-white">
             <span className="flex items-center gap-4 justify-center font-['Ubuntu']">
               <GlobeLock size={48} strokeWidth={1.25} />
-              G'Steven's
+              Gabriel Steven
             </span>{" "}
           </div>
 
@@ -101,7 +155,7 @@ const Hero = () => {
           <div className="text-3xl font-bold text-white md:hidden">
             <span className="flex items-center gap-4 justify-center">
               <GlobeLock size={48} strokeWidth={1.25} />
-              G'Steven's
+              Gabriel Steven
             </span>{" "}
           </div>
 
@@ -193,8 +247,8 @@ const Hero = () => {
 
         {/* Contact Modal */}
         {showModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-            <div className="bg-white rounded-lg p-8 w-full max-w-sm shadow-lg relative font-['Montserrat']">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-300 opacity-60">
+            <div className="bg-white rounded-lg p-8 w-full max-w-sm shadow-lg relative font-['Montserrat'] z-50">
               <button
                 className="absolute top-2 right-3 text-gray-500 hover:text-red-500 text-2xl"
                 onClick={() => setShowModal(false)}
