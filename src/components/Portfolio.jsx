@@ -25,12 +25,14 @@ const Portfolio = () => {
         </div>
 
         <div className="md:w-1/2 border-1">
-          <PortList
-            image={portsport}
-            imageAlt="Sportsloc platform"
-            category="Sport Facility Discovery and Community"
-            title="SportsLoc"
-          />
+          <Link to="/sportloc">
+            <PortList
+              image={portsport}
+              imageAlt="Sportsloc platform"
+              category="Sport Facility Discovery and Community"
+              title="SportsLoc"
+            />
+          </Link>
         </div>
       </div>
     </section>
