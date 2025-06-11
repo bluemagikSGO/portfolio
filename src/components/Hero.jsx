@@ -9,7 +9,7 @@ AOS.init();
 
 import React, { useState } from "react";
 import { Link } from "react-scroll";
-import cv from "/public/gstevenCV.pdf";
+import cv from "/public/gabsteven.pdf";
 
 const Hero = () => {
   const [menu, setMenu] = useState(false);
@@ -142,7 +142,12 @@ const Hero = () => {
           </div>
           <div>
             <button className="border-1 px-[1.5rem] py-[0.8rem] text-white hover:bg-white hover:text-black transition-all duration-500 font-semibold">
-              <a href="/public/gstevenCV.pdf" download={cv}>
+              <a
+                href="/public/gabsteven.pdf"
+                download={cv}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Download CV
               </a>
             </button>
@@ -207,7 +212,12 @@ const Hero = () => {
                   }}
                 >
                   <button className="border-1 px-[1rem] py-[0.4rem] text-white hover:bg-white hover:text-black transition-all duration-500 font-semibold active:text-red-500">
-                    <a href="/public/gstevenCV.pdf" download={cv}>
+                    <a
+                      href="/public/gabsteven.pdf"
+                      download={cv}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       Download CV
                     </a>
                   </button>

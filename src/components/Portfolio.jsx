@@ -35,6 +35,9 @@ const Portfolio = () => {
           </Link>
         </div>
       </div>
+      <div className="text-center text-2xl font-['Montserrat']">
+        (JOBS DONE FOR CLIENTS CAN NOT BE UPLOADED HERE)
+      </div>
     </section>
   );
 };
