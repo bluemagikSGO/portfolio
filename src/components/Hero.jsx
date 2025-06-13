@@ -4,6 +4,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import emailjs from "@emailjs/browser";
 import { useRef } from "react";
+import logo from "../assets/programming.png";
 
 AOS.init();
 
@@ -115,7 +116,7 @@ const Hero = () => {
         <nav className="relative md:flex justify-between px-[10rem] pt-[2rem] items-center z-10 hidden">
           <div className="text-3xl font-bold text-white">
             <span className="flex items-center gap-4 justify-center font-['Ubuntu']">
-              <GlobeLock size={48} strokeWidth={1.25} />
+              <img className="w-17" src={logo} alt="logo" />
               Gabriel Steven
             </span>{" "}
           </div>
@@ -154,7 +155,7 @@ const Hero = () => {
         <nav className="relative z-10 flex justify-between items-center p-6">
           <div className="text-3xl font-bold text-white md:hidden">
             <span className="flex items-center gap-4 justify-center">
-              <GlobeLock size={48} strokeWidth={1.25} />
+              <img className="w-12" src={logo} alt="logo" />
               Gabriel Steven
             </span>{" "}
           </div>
@@ -223,8 +224,8 @@ const Hero = () => {
           data-aos-easing="ease-in-out"
           className="text-white relative z-10 flex flex-col items-center justify-center h-[40rem]  text-center px-3"
         >
-          <div className="text-6xl font-bold  leading-16 md:w-[50rem] font-['Montserrat']">
-            Freelance web developer based in Lagos Nigeria
+          <div className="text-5xl font-bold  leading-16 md:w-[50rem] font-['Montserrat']">
+            Freelance front-end web developer based in Lagos Nigeria
           </div>
           <div className="mt-8 text-lg font-sans font-semibold">
             Expert development services by Nigeria-based freelancer for your
