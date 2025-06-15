@@ -20,13 +20,13 @@ const Counter = () => {
         </div>
 
         <div className="text-white text-5xl md:w-5 flex items-center gap-5 justify-center md:px-40 font-bold  text-center md:flex-row flex-col">
-          <CountUp start={0} end={3} duration={3} />
+          <CountUp start={0} end={9} duration={3} />
           <div className="md:text-sm text-[0.9rem] font-['Montserrat']">
             Successful projects
           </div>
         </div>
         <div className="text-white text-5xl md:w-5 flex items-center gap-5 justify-center md:px-40 font-bold  text-center md:flex-row flex-col">
-          <CountUp start={0} end={3} duration={3} />
+          <CountUp start={0} end={11} duration={3} />
           <div className="md:text-sm text-[0.9rem] font-['Montserrat']">
             Happy clients
           </div>
