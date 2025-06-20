@@ -2,6 +2,7 @@ import React from "react";
 import PortList from "./PortList";
 import portimg from "../assets/metherappy.jpg";
 import portsport from "../assets/sportsloc.jpg";
+import portnova from "../assets/portnova.png";
 import { Link } from "react-router-dom";
 import Metherappy from "../pages/Metherappy";
 
@@ -12,8 +13,8 @@ const Portfolio = () => {
       <p className="text-center text-2xl font-['Montserrat'] pt-10">
         Portfolio
       </p>
-      <div className="md:flex md:space-y-0 space-y-10 gap-10 md:p-12 p-6 ">
-        <div className="md:w-1/2 border-1">
+      <div className="md:grid md:grid-cols-2  md:space-y-0 space-y-10 gap-7 md:p-12 p-6 items-center md:justify-items-center ">
+        <div className="md:w-1/2 border">
           <Link to="/metherappy">
             <PortList
               image={portimg}
@@ -31,6 +32,17 @@ const Portfolio = () => {
               imageAlt="Sportsloc platform"
               category="Sport Facility Discovery and Community"
               title="SportsLoc"
+            />
+          </Link>
+        </div>
+
+        <div className="md:w-1/2 border-1">
+          <Link to="/sportloc">
+            <PortList
+              image={portnova}
+              imageAlt="Novabeak platform"
+              category="Crypto Investment"
+              title="Novabeak"
             />
           </Link>
         </div>
