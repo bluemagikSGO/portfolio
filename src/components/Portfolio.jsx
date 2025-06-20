@@ -37,7 +37,7 @@ const Portfolio = () => {
         </div>
 
         <div className="md:w-1/2 border-1">
-          <Link to="/sportloc">
+          <Link to="/novabeak">
             <PortList
               image={portnova}
               imageAlt="Novabeak platform"
