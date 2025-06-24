@@ -34,7 +34,9 @@ const About = () => {
               <Youtube size={35} />
             </div>
             <div className="hover:text-red-500 active:text-red-500">
-              <Linkedin size={35} />
+              <a href="https://www.linkedin.com/in/steven-gabriel-059345371/">
+                <Linkedin size={35} />
+              </a>
             </div>
           </div>
         </div>
