@@ -46,7 +46,7 @@ const Port = () => {
             GabSteven is a simple yet concise portfolio website that serves as a
             container for all projects executed by me and since the porfolio
             container is also a project made and done by me, it is only logical
-            to add it to the lists of projects executed.
+            to add it to the list of projects executed.
           </p>
         </section>
 
