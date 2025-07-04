@@ -7,6 +7,7 @@ import Metherappy from "./pages/Metherappy";
 import ScrollToTop from "./components/ScrollToTop";
 import Sportsloc from "./pages/Sportsloc";
 import Novabeak from "./pages/Novabeak";
+import Port from "./pages/Port";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/metherappy" element={<Metherappy />} />
           <Route path="/sportloc" element={<Sportsloc />} />
           <Route path="/novabeak" element={<Novabeak />} />
+          <Route path="/myport" element={<Port />} />
         </Routes>
       </Router>
     </>

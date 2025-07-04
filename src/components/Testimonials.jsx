@@ -12,7 +12,7 @@ const Testimonials = () => {
       <p className="text-center text-2xl font-['Montserrat'] pt-10">
         What my clients have to say
       </p>
-      <div className="md:flex md:items-stretch md:justify-center md:mx-10 md:ml-10 flex flex-col gap-6">
+      <div className="md:flex-row  flex flex-col  justify-between">
         <TestimonialList
           comment='"Steven is an easy to work with developer and he really knows how to make complicated tasks come alive, I recommend"'
           clientName="Donald"
@@ -24,7 +24,7 @@ const Testimonials = () => {
           image={test1}
         />
         <TestimonialList
-          comment='"A friend recommended Steve and i must confess, I wish i had known him a while ago. My projects are done exactly to my taste with the right attention to details needed by a frontend developer, highly recommended"'
+          comment='"A friend recommended Steve and i must confess, I wish i had known him a while ago. My projects are done exactly to my taste with the right attention to details. Highly recommended"'
           clientName="Ruben"
           image={test3}
         />

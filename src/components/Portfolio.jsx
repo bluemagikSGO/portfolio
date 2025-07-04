@@ -3,6 +3,7 @@ import PortList from "./PortList";
 import portimg from "../assets/metherappy.jpg";
 import portsport from "../assets/sportsloc.jpg";
 import portnova from "../assets/portnova.png";
+import myport from "../assets/myport.png";
 import { Link } from "react-router-dom";
 import Metherappy from "../pages/Metherappy";
 
@@ -43,6 +44,16 @@ const Portfolio = () => {
               imageAlt="Novabeak platform"
               category="Crypto Investment"
               title="Novabeak"
+            />
+          </Link>
+        </div>
+        <div className="md:w-1/2 border-1">
+          <Link to="/myport">
+            <PortList
+              image={myport}
+              imageAlt="My portfolio platform"
+              category="My Portfolio"
+              title="Portfolio Site"
             />
           </Link>
         </div>
