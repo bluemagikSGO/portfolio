@@ -14,7 +14,7 @@ const Metherappy = () => {
   return (
     <div
       id="metherappy"
-      className="min-h-screen text-white font-['Montserrat'] pb-15"
+      className="min-h-screen text-white font-['Montserrat'] pb-15 "
     >
       {/* Hero Section */}
       <section className="flex flex-col items-center py-12 px-4">
@@ -92,6 +92,7 @@ const Metherappy = () => {
       </section>
 
       {/* Screenshots / Demo Gallery */}
+
       <section className="max-w-8xl mx-auto py-8 px-4">
         <h2 className="text-2xl font-bold  mb-4">Screenshots</h2>
         <div className="grid md:grid-cols-3 gap-6">

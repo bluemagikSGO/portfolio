@@ -8,6 +8,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import Sportsloc from "./pages/Sportsloc";
 import Novabeak from "./pages/Novabeak";
 import Port from "./pages/Port";
+import Iteminder from "./pages/Iteminder";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/sportloc" element={<Sportsloc />} />
           <Route path="/novabeak" element={<Novabeak />} />
           <Route path="/myport" element={<Port />} />
+          <Route path="/iteminder" element={<Iteminder />} />
         </Routes>
       </Router>
     </>
