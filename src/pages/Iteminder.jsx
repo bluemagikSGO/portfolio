@@ -129,7 +129,7 @@ const Iteminder = () => {
       {/* Links */}
       <section className="max-w-3xl mx-auto py-8 px-4 flex flex-col items-center gap-4">
         <a
-          href="https://iteminder.example.com" // ← replace with your live URL
+          href="https://iteminder.com" // ← replace with your live URL
           target="_blank"
           rel="noopener noreferrer"
           className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold shadow"
@@ -137,7 +137,7 @@ const Iteminder = () => {
           🔗 Live Demo
         </a>
         <a
-          href="https://github.com/your-org/iteminder" // ← optional repo link
+          href="https://github.com/bluemagiksgo" // ← optional repo link
           target="_blank"
           rel="noopener noreferrer"
           className="underline"
