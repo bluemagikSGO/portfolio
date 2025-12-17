@@ -6,7 +6,7 @@ import { Route, HashRouter as Router, Routes } from "react-router-dom";
 import Metherappy from "./pages/Metherappy";
 import ScrollToTop from "./components/ScrollToTop";
 import Sportsloc from "./pages/Sportsloc";
-import Novabeak from "./pages/Novabeak";
+
 import Port from "./pages/Port";
 import Iteminder from "./pages/Iteminder";
 
@@ -19,7 +19,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/metherappy" element={<Metherappy />} />
           <Route path="/sportloc" element={<Sportsloc />} />
-          <Route path="/novabeak" element={<Novabeak />} />
+
           <Route path="/myport" element={<Port />} />
           <Route path="/iteminder" element={<Iteminder />} />
         </Routes>

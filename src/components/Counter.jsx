@@ -2,43 +2,39 @@ import React from "react";
 import CountUp from "react-countup";
 
 const Counter = () => {
-  return (
-    <>
-      <hr className="mx-15 mt-10 text-white" />
-      <div
-        className="
-    // medium devices
-     md:flex md:flex-row md:px-0 md:justify-between
-    //  mobile devices
-     mt-15  px-25  flex flex-col items-center gap-12 text-center h-fit"
-      >
-        <div className="text-white text-5xl md:w-5 flex md:flex-row flex-col items-center gap-5 justify-center md:px-40 font-bold text-center">
-          <CountUp start={0} end={1} duration={3} delay={0} />
-          <div className="md:text-sm text-[0.9rem] font-['Montserrat']">
-            Years of experience
-          </div>
-        </div>
+  const stats = [
+    { number: 1, label: "Year of Experience" },
+    { number: 9, label: "Successful Projects" },
+    { number: 11, label: "Happy Clients" },
+    { number: 1, label: "Award Won" },
+  ];
 
-        <div className="text-white text-5xl md:w-5 flex items-center gap-5 justify-center md:px-40 font-bold  text-center md:flex-row flex-col">
-          <CountUp start={0} end={9} duration={3} />
-          <div className="md:text-sm text-[0.9rem] font-['Montserrat']">
-            Successful projects
+  return (
+    <div className="w-full text-white">
+      {/* Divider */}
+      <hr className="w-11/12 max-w-6xl mx-auto border-white/20 my-10" />
+
+      {/* Stats Container */}
+      <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-12 md:gap-4">
+        {stats.map((stat, index) => (
+          <div
+            key={index}
+            className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-5 w-full md:w-1/4"
+          >
+            {/* The Number */}
+            <h3 className="text-5xl md:text-6xl font-bold text-blue-400">
+              <CountUp start={0} end={stat.number} duration={3} delay={0.5} />
+              <span className="text-3xl ml-1">+</span> {/* Optional '+' sign */}
+            </h3>
+
+            {/* The Label */}
+            <p className="text-sm md:text-base font-['Montserrat'] font-medium text-gray-300 text-center md:text-left max-w-[100px] leading-tight">
+              {stat.label}
+            </p>
           </div>
-        </div>
-        <div className="text-white text-5xl md:w-5 flex items-center gap-5 justify-center md:px-40 font-bold  text-center md:flex-row flex-col">
-          <CountUp start={0} end={11} duration={3} />
-          <div className="md:text-sm text-[0.9rem] font-['Montserrat']">
-            Happy clients
-          </div>
-        </div>
-        <div className="text-white text-5xl md:w-5 flex items-center gap-5 justify-center md:px-40 font-bold  text-center md:flex-row flex-col">
-          <CountUp start={0} end={1} duration={3} />
-          <div className="md:text-sm text-[0.9rem] font-['Montserrat']">
-            Number of awards
-          </div>
-        </div>
+        ))}
       </div>
-    </>
+    </div>
   );
 };
 

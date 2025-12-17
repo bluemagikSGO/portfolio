@@ -1,180 +1,259 @@
 import React from "react";
-import portimg from "../assets/metherappy.jpg";
+import {
+  Copyright,
+  ExternalLink,
+  Github,
+  Layout,
+  Shield,
+  MessageSquare,
+  UserCheck,
+  Code,
+  ArrowRight,
+  Mail,
+} from "lucide-react";
 
+// Images
+import portimg from "../assets/metherappy.jpg";
 import dashboardImg from "../assets/dashbordImg.png";
 import loginImg from "../assets/loginImg.png";
 import bookingImg from "../assets/bookingImg.png";
 import code1 from "../assets/code1.png";
 import code2 from "../assets/code2.png";
 import code3 from "../assets/code3.png";
-import { Copyright } from "lucide-react";
-import { Link } from "react-router-dom";
 
 const Metherappy = () => {
   return (
     <div
       id="metherappy"
-      className="min-h-screen text-white font-['Montserrat'] pb-15 "
+      className="min-h-screen text-white font-['Montserrat'] bg-[#0f0a2a] pb-16"
     >
-      {/* Hero Section */}
-      <section className="flex flex-col items-center py-12 px-4">
-        <h1 className="text-4xl md:text-5xl font-bold  mb-4 text-center">
-          meTherappy – Your Mental Health Companion
+      {/* 1. HERO SECTION */}
+      <section className="flex flex-col items-center py-20 px-6">
+        <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center font-['Ubuntu']">
+          meTherappy
         </h1>
-        <p className="text-lg md:text-xl  mb-6 text-center max-w-2xl">
-          An online platform connecting people with licensed therapists and
-          counselors.
+        <p className="text-lg md:text-xl mb-10 text-center max-w-2xl text-gray-300">
+          Your Mental Health Companion. An online platform connecting people
+          with licensed therapists and counselors.
         </p>
-        <div className="mb-6">
+
+        {/* Hero Image */}
+        <div className="mb-10 relative group">
+          <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 to-blue-600 rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
           <img
             src={portimg}
             alt="meTherappy homepage mockup"
-            className="w-80 md:w-[420px] rounded-xl shadow-lg border"
+            className="relative w-full max-w-[500px] rounded-xl shadow-2xl border border-white/10"
           />
         </div>
-        <div className="">
+
+        {/* Buttons */}
+        <div className="flex gap-4">
           <a
             href="https://metherappy.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold shadow"
+            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-bold transition-all shadow-lg hover:shadow-blue-600/20"
           >
-            View Live
+            <ExternalLink size={20} /> View Live
+          </a>
+          <a
+            href="https://github.com/bluemagikSGO/meTherappy.git"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 border border-white/30 hover:bg-white/10 text-white px-8 py-3 rounded-lg font-bold transition-all"
+          >
+            <Github size={20} /> View Code
           </a>
         </div>
       </section>
 
-      {/* Project Overview */}
-      <section className="max-w-3xl mx-auto py-8 px-4">
-        <h2 className="text-2xl font-bold  mb-2">Project Overview</h2>
-        <p className="">
-          meTherappy is a mental health platform I designed and developed to
-          help users book sessions with qualified therapists, track progress,
-          and access resources for wellness.
+      {/* 2. OVERVIEW */}
+      <section className="max-w-4xl mx-auto py-10 px-6">
+        <h2 className="text-3xl font-bold mb-6 border-l-4 border-teal-500 pl-4">
+          Project Overview
+        </h2>
+        <p className="text-gray-300 text-lg leading-relaxed">
+          meTherappy is a mental health platform designed to lower the barrier
+          to entry for therapy. I developed this to help users seamlessly book
+          sessions with qualified therapists, track their progress, and access
+          curated wellness resources in a safe, non-judgmental digital
+          environment.
         </p>
       </section>
 
-      {/* My Role & Responsibilities */}
-      <section className="max-w-4xl mx-auto py-8 px-4 grid md:grid-cols-2 gap-8 md:pl-20">
-        <div>
-          <h2 className="text-2xl font-bold  mb-4">
-            My Role & Responsibilities
-          </h2>
-          <ul className="space-y-3">
-            <li>🔧 Frontend Development</li>
-            <li>🧠 UX/UI Design</li>
-            <li>🗄️ Backend Collaboration</li>
-            <li>🧪 Testing & Deployment</li>
-          </ul>
-        </div>
-        {/* Core Features */}
-        <div>
-          <h2 className="text-2xl font-bold  mb-4">Core Features</h2>
-          <ul className="space-y-3">
-            <li>🗂️ Therapist discovery & booking</li>
-            <li>🔒 User authentication</li>
-            <li>💬 Chat or messaging</li>
-            <li>👩‍⚕️ Therapist profiles & filtering</li>
-            <li>📱 Responsive design</li>
-            <li>📝 Secure form handling</li>
-          </ul>
-        </div>
-      </section>
+      {/* 3. ROLE & FEATURES (Grid Layout) */}
+      <section className="max-w-6xl mx-auto py-10 px-6">
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          {/* Role */}
+          <div className="bg-[#1b1448] p-8 rounded-2xl border border-white/5 shadow-xl">
+            <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
+              <span className="text-blue-400">🔧</span> My Role
+            </h2>
+            <ul className="space-y-4 text-gray-300">
+              <li className="flex gap-3 items-start">
+                <ArrowRight size={18} className="text-blue-500 mt-1 shrink-0" />{" "}
+                Frontend Architecture & Development
+              </li>
+              <li className="flex gap-3 items-start">
+                <ArrowRight size={18} className="text-blue-500 mt-1 shrink-0" />{" "}
+                UI/UX Design (Figma to Code)
+              </li>
+              <li className="flex gap-3 items-start">
+                <ArrowRight size={18} className="text-blue-500 mt-1 shrink-0" />{" "}
+                Backend API Integration
+              </li>
+              <li className="flex gap-3 items-start">
+                <ArrowRight size={18} className="text-blue-500 mt-1 shrink-0" />{" "}
+                Responsive Mobile Testing
+              </li>
+            </ul>
+          </div>
 
-      {/* Tech Stack */}
-      <section className="max-w-3xl mx-auto py-8 px-4">
-        <h2 className="text-2xl font-bold  mb-4">Tech Stack</h2>
-        <ul className="list-disc pl-6 space-y-2 ">
-          <li>HTML</li>
-          <li>CSS</li>
-          <li>JAVA SCRIPT</li>
-        </ul>
-      </section>
-
-      {/* Screenshots / Demo Gallery */}
-
-      <section className="max-w-8xl mx-auto py-8 px-4">
-        <h2 className="text-2xl font-bold  mb-4">Screenshots</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          <img
-            src={dashboardImg}
-            alt="Dashboard"
-            className="rounded-lg shadow"
-          />
-          <img src={loginImg} alt="Login Page" className="rounded-lg shadow" />
-          <img
-            src={bookingImg}
-            alt="Booking Page"
-            className="rounded-lg shadow"
-          />
-          <img
-            src={code1}
-            alt="code1"
-            className="rounded-lg shadow h-64 w-130"
-          />
-          <img
-            src={code2}
-            alt="code2"
-            className="rounded-lg shadow h-64 w-130"
-          />
-          <img
-            src={code3}
-            alt="code3"
-            className="rounded-lg shadow h-64 w-130"
-          />
+          {/* Features */}
+          <div className="bg-[#1b1448] p-8 rounded-2xl border border-white/5 shadow-xl">
+            <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
+              <span className="text-teal-400">✨</span> Core Features
+            </h2>
+            <ul className="space-y-4 text-gray-300">
+              <li className="flex gap-3 items-center">
+                <UserCheck size={18} className="text-teal-500 shrink-0" />{" "}
+                Therapist discovery & booking
+              </li>
+              <li className="flex gap-3 items-center">
+                <Shield size={18} className="text-teal-500 shrink-0" /> Secure
+                user authentication
+              </li>
+              <li className="flex gap-3 items-center">
+                <MessageSquare size={18} className="text-teal-500 shrink-0" />{" "}
+                Real-time chat messaging system
+              </li>
+              <li className="flex gap-3 items-center">
+                <Layout size={18} className="text-teal-500 shrink-0" />{" "}
+                Therapist profile filtering
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
 
-      {/* Challenges & Learnings */}
-      <section className="max-w-3xl mx-auto py-8 px-4">
-        <h2 className="text-2xl font-bold  mb-4">Challenges & Learnings</h2>
-        <ul className="list-disc pl-6 space-y-2 ">
-          <li>User authentication complexity</li>
-          <li>Designing a sensitive and welcoming UI</li>
-          <li>Ensuring mobile responsiveness</li>
-          <li>Managing therapist data and booking flow</li>
-        </ul>
+      {/* 4. TECH STACK (Chips) */}
+      <section className="max-w-4xl mx-auto py-10 px-6 text-center">
+        <h2 className="text-2xl font-bold mb-8">Technologies Used</h2>
+        <div className="flex flex-wrap justify-center gap-4">
+          {[
+            "HTML5",
+            "CSS3",
+            "JavaScript",
+            "React.js",
+            "Tailwind CSS",
+            "REST APIs",
+          ].map((tech) => (
+            <span
+              key={tech}
+              className="px-6 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-semibold hover:bg-white/10 transition-colors cursor-default"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
       </section>
 
-      {/* What's Next / Future Plans */}
-      <section className="max-w-3xl mx-auto py-8 px-4">
-        <h2 className="text-2xl font-bold  mb-4">What’s Next?</h2>
-        <ul className="list-disc pl-6 space-y-2 ">
-          <li>Add group therapy rooms</li>
-          <li>AI recommendations</li>
-          <li>Payment integration</li>
-          <li>Mental health blog</li>
-        </ul>
+      {/* 5. GALLERY (Screenshots & Code) */}
+      <section className="max-w-7xl mx-auto py-16 px-6">
+        {/* UI Gallery */}
+        <h2 className="text-3xl font-bold mb-8 text-center">App Interface</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          {[loginImg, dashboardImg, bookingImg].map((img, i) => (
+            <div
+              key={i}
+              className="rounded-xl overflow-hidden border border-white/10 shadow-lg group hover:scale-105 transition-transform duration-500"
+            >
+              <img
+                src={img}
+                alt="App UI"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Code Snippets */}
+        <h2 className="text-3xl font-bold mb-8 text-center flex items-center justify-center gap-3">
+          <Code /> Under the Hood
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[code1, code2, code3].map((code, i) => (
+            <div
+              key={i}
+              className="bg-black/40 p-2 rounded-lg border border-white/10 shadow-inner"
+            >
+              <img
+                src={code}
+                alt={`Code snippet ${i}`}
+                className="w-full rounded opacity-90 hover:opacity-100 transition-opacity"
+              />
+            </div>
+          ))}
+        </div>
       </section>
 
-      {/* Links & CTA */}
-      <section className="max-w-3xl mx-auto py-8 px-4 flex flex-col items-center gap-4">
-        <a
-          href="https://metherappy.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold shadow"
-        >
-          🔗 Live Demo
-        </a>
-        <a
-          href="https://github.com/bluemagikSGO/meTherappy.git"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline "
-        >
-          📦 GitHub Repo
-        </a>
+      {/* 6. CHALLENGES & FUTURE */}
+      <section className="max-w-6xl mx-auto py-10 px-6">
+        <div className="grid md:grid-cols-2 gap-12">
+          {/* Challenges */}
+          <div>
+            <h2 className="text-2xl font-bold mb-4 text-red-400">
+              Challenges & Learnings
+            </h2>
+            <ul className="list-disc pl-5 space-y-3 text-gray-300">
+              <li>Handling complex User Authentication flows securely.</li>
+              <li>
+                Designing a UI that feels "calm" and welcoming (Color
+                psychology).
+              </li>
+              <li>
+                Ensuring perfect responsiveness across varied mobile viewports.
+              </li>
+              <li>Managing complex state for the therapist booking system.</li>
+            </ul>
+          </div>
+
+          {/* Future Plans */}
+          <div>
+            <h2 className="text-2xl font-bold mb-4 text-green-400">
+              What’s Next?
+            </h2>
+            <ul className="list-disc pl-5 space-y-3 text-gray-300">
+              <li>Implement live video call rooms for sessions.</li>
+              <li>AI-driven wellness recommendations.</li>
+              <li>Stripe integration for seamless payments.</li>
+              <li>Community blog and resource hub.</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
-      {/* Footer */}
-
-      <hr className="mx-15 mt-10" />
-      <div className="text-center">stevengabriel2015@gmail.com</div>
-      <footer className="flex gap-4 items-center justify-center mt-10">
-        <Copyright /> {new Date().getFullYear()} All Rights Reserved Gabriel
-        Steven O
-      </footer>
+      {/* 7. FOOTER */}
+      <div className="mt-20 border-t border-white/10 pt-10">
+        <div className="flex flex-col items-center gap-6">
+          <a
+            href="mailto:stevengabriel2015@gmail.com"
+            className="flex items-center gap-3 text-xl hover:text-blue-400 transition-colors duration-300"
+          >
+            <Mail size={24} />
+            <span className="font-['Montserrat']">
+              stevengabriel2015@gmail.com
+            </span>
+          </a>
+          <footer className="flex items-center gap-2 text-gray-500 text-sm font-['Ubuntu']">
+            <Copyright size={16} />
+            <span>
+              {new Date().getFullYear()} All Rights Reserved | Gabriel Steven O.
+            </span>
+          </footer>
+        </div>
+      </div>
     </div>
   );
 };

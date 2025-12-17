@@ -1,28 +1,31 @@
-import { GlobeLock } from "lucide-react";
+import React, { useState, useRef, useEffect } from "react";
+import { Link } from "react-scroll";
 import { Menu, X } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import emailjs from "@emailjs/browser";
-import { useRef } from "react";
 import logo from "../assets/programming.png";
-
-AOS.init();
-
-import React, { useState } from "react";
-import { Link } from "react-scroll";
-import cv from "/public/gabsteven.pdf";
+import cv from "/public/gabsteven.pdf"; // Ensure this path is correct based on your folder structure
 
 const Hero = () => {
   const [menu, setMenu] = useState(false);
-  const [showModal, setShowModal] = useState(false); // Modal state
+  const [showModal, setShowModal] = useState(false);
   const formRef = useRef();
+
   const [form, setForm] = useState({
     name: "",
     email: "",
     message: "",
   });
 
-  const toggled = () => {
+  // Initialize AOS on mount
+  useEffect(() => {
+    AOS.init({
+      once: true, // Animations only happen once
+    });
+  }, []);
+
+  const toggleMenu = () => {
     setMenu(!menu);
   };
 
@@ -33,17 +36,15 @@ const Hero = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // form handling
-
     emailjs
       .sendForm(
-        "service_56vf85l", // Replace with your EmailJS Service ID
-        "template_7up3rad", // Replace with your EmailJS Template ID
+        "service_56vf85l",
+        "template_7up3rad",
         formRef.current,
-        "rX-Q7uQmFYKniQDoU" // Replace with your Public Key
+        "rX-Q7uQmFYKniQDoU"
       )
       .then(
-        (result) => {
+        () => {
           alert("Message sent and delivered!");
           setShowModal(false);
           setForm({ name: "", email: "", message: "" });
@@ -56,211 +57,146 @@ const Hero = () => {
   };
 
   return (
-    <div>
-      {/* Contact Modal */}
-      {showModal && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center">
-          <div className="absolute inset-0 bg-black bg-opacity-70"></div>
-          <div className="bg-gray-300 rounded-lg p-8 w-full max-w-sm shadow-lg relative font-['Montserrat'] z-10">
-            <button
-              className="absolute top-2 right-3 text-gray-500 hover:text-red-500 text-2xl"
-              onClick={() => setShowModal(false)}
-              aria-label="Close"
-            >
-              &times;
-            </button>
-            <h2 className="text-2xl font-bold mb-4 text-center text-black">
-              Contact Me
-            </h2>
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
-              <input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                value={form.name}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={form.email}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <textarea
-                name="message"
-                placeholder="Your Message"
-                value={form.message}
-                onChange={handleChange}
-                required
-                rows={4}
-                className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <button
-                type="submit"
-                className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 font-semibold"
-              >
-                Send Message
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
+    <div className="relative w-full h-screen min-h-[600px]">
+      {/* Background Image & Overlay */}
+      <div className="absolute inset-0 bg-[url('assets/background.jpg')] bg-cover bg-center bg-no-repeat z-0">
+        <div className="absolute inset-0 bg-black/70"></div>
+      </div>
 
-      <div className="relative h-fit bg-[url('assets/background.jpg')] bg-cover z-10">
-        <div className="absolute inset-0 bg-black opacity-70 z-0"></div>
-        <nav className="relative md:flex justify-between px-[10rem] pt-[2rem] items-center z-10 hidden">
-          <div className="text-3xl font-bold text-white">
-            <span className="flex items-center gap-4 justify-center font-['Ubuntu']">
-              <img className="w-17" src={logo} alt="logo" />
+      {/* Main Content Container */}
+      <div className="relative z-10 h-full flex flex-col">
+        
+        {/* Navigation Bar */}
+        <nav className="w-full max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+          {/* Logo */}
+          <div className="text-2xl md:text-3xl font-bold text-white font-['Ubuntu']">
+            <span className="flex items-center gap-3">
+              <img className="w-12 md:w-16" src={logo} alt="logo" />
               Gabriel Steven
-            </span>{" "}
+            </span>
           </div>
 
-          <div>
-            <ul className="md:flex gap-9  text-lg font-semibold text-gray-300 font-['Ubuntu']">
-              <Link to="about" smooth={true} duration={500}>
-                <li className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer">
-                  About
-                </li>
-              </Link>
-
-              <Link to="portfolio" smooth={true} duration={500}>
-                <li className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer">
-                  Portfolio
-                </li>
-              </Link>
-              <Link to="testimonial" smooth={true} duration={500}>
-                <li className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer">
-                  Testimonials
-                </li>
-              </Link>
-            </ul>
-          </div>
-          <div>
-            <button className="border-1 px-[1.5rem] py-[0.8rem] text-white hover:bg-white hover:text-black transition-all duration-500 font-semibold">
-              <a href={cv} target="_blank" rel="noopener noreferrer">
-                Download CV
-              </a>
-            </button>
-          </div>
-        </nav>
-
-        {/* menu button */}
-
-        <nav className="relative z-10 flex justify-between items-center p-6">
-          <div className="text-3xl font-bold text-white md:hidden">
-            <span className="flex items-center gap-4 justify-center">
-              <img className="w-12" src={logo} alt="logo" />
-              Gabriel Steven
-            </span>{" "}
-          </div>
-
-          <div
-            className="relative z-10 text-white transition-all duration-300 md:hidden"
-            onClick={toggled}
-          >
-            {menu ? <X size={40} /> : <Menu size={40} />}
-          </div>
-        </nav>
-        {menu && (
-          <div className="relative">
-            <div className="absolute md:hidden w-full z-50">
-              <ul className="flex flex-col text-lg font-semibold text-gray-300  bg-[#211c3f] gap-9 pt-8 transition-all duration-300 font-['Ubuntu']">
-                <Link to="about" smooth={true} duration={500}>
-                  <li
-                    className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer border-b-2 pl-9 pb-4"
-                    onClick={() => {
-                      setMenu(false);
-                    }}
-                  >
-                    About
-                  </li>
-                </Link>
-                <Link to="portfolio" smooth={true} duration={500}>
-                  <li
-                    className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer border-b-2 pl-9 pb-4"
-                    onClick={() => {
-                      setMenu(false);
-                    }}
-                  >
-                    Portfolio
-                  </li>
-                </Link>
-                <Link to="testimonial" smooth={true} duration={500}>
-                  <li
-                    className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer border-b-2 pl-9 pb-4"
-                    onClick={() => {
-                      setMenu(false);
-                    }}
-                  >
-                    Testimonials
-                  </li>
-                </Link>
-                <li
-                  className="hover:text-white transition-all duration-300 hover:scale-[1.1] cursor-pointer border-b-2 pl-9 pb-4"
-                  onClick={() => {
-                    setMenu(false);
-                  }}
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-8">
+            <ul className="flex gap-8 text-lg font-semibold text-gray-300 font-['Ubuntu']">
+              {["About", "Portfolio", "Testimonial"].map((item) => (
+                <Link
+                  key={item}
+                  to={item.toLowerCase()}
+                  smooth={true}
+                  duration={500}
                 >
-                  <button className="border-1 px-[1rem] py-[0.4rem] text-white hover:bg-white hover:text-black transition-all duration-500 font-semibold active:text-red-500">
-                    <a href={cv} target="_blank" rel="noopener noreferrer">
-                      Download CV
-                    </a>
-                  </button>
-                </li>
-              </ul>
-            </div>
+                  <li className="hover:text-white hover:scale-105 transition-all duration-300 cursor-pointer">
+                    {item}
+                  </li>
+                </Link>
+              ))}
+            </ul>
+            
+            <a
+              href={cv}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-white px-6 py-2 text-white hover:bg-white hover:text-black transition-all duration-300 font-semibold rounded-sm"
+            >
+              Download CV
+            </a>
+          </div>
+
+          {/* Mobile Menu Toggle */}
+          <div className="md:hidden text-white cursor-pointer" onClick={toggleMenu}>
+            {menu ? <X size={35} /> : <Menu size={35} />}
+          </div>
+        </nav>
+
+        {/* Mobile Dropdown Menu */}
+        {menu && (
+          <div className="md:hidden absolute top-24 left-0 w-full bg-[#211c3f] border-t border-gray-700 shadow-xl z-50">
+            <ul className="flex flex-col text-lg font-semibold text-gray-300 font-['Ubuntu'] p-6 gap-4">
+              {["About", "Portfolio", "Testimonial"].map((item) => (
+                <Link
+                  key={item}
+                  to={item.toLowerCase()}
+                  smooth={true}
+                  duration={500}
+                  onClick={() => setMenu(false)}
+                >
+                  <li className="hover:text-white border-b border-gray-600 pb-2 cursor-pointer">
+                    {item}
+                  </li>
+                </Link>
+              ))}
+              <li className="pt-2">
+                <a
+                  href={cv}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block border border-white px-6 py-2 text-white hover:bg-white hover:text-black transition-all duration-300 font-semibold"
+                >
+                  Download CV
+                </a>
+              </li>
+            </ul>
           </div>
         )}
 
+        {/* Hero Text Content */}
         <section
+          className="flex-grow flex flex-col items-center justify-center text-center px-4"
           data-aos="zoom-out"
           data-aos-duration="1000"
-          data-aos-easing="ease-in-out"
-          className="text-white relative z-10 flex flex-col items-center justify-center h-[40rem]  text-center px-3"
         >
-          <div className="text-5xl font-bold  leading-16 md:w-[50rem] font-['Montserrat']">
-            Freelance front-end web developer based in Lagos Nigeria
-          </div>
-          <div className="mt-8 text-lg font-sans font-semibold">
-            Expert development services by Nigeria-based freelancer for your
+          <h1 className="text-4xl md:text-6xl font-bold text-white font-['Montserrat'] leading-tight max-w-4xl">
+            Freelance front-end web developer based in Lagos, Nigeria
+          </h1>
+          
+          <p className="mt-6 text-lg md:text-xl text-gray-300 font-sans font-medium max-w-2xl">
+            Expert development services by a Nigeria-based freelancer for your
             website and web app needs.
-          </div>
-          <div className="leading-normal mt-8 space-x-4">
+          </p>
+
+          <div className="mt-10 flex flex-col sm:flex-row gap-4">
             <button
-              className="border-1 px-[1.5rem] py-[0.8rem] text-black bg-white hover:bg-transparent hover:text-white transition-all duration-500 font-semibold"
               onClick={() => setShowModal(true)}
+              className="px-8 py-3 bg-white text-black font-semibold border border-white hover:bg-transparent hover:text-white transition-all duration-300 rounded-sm"
             >
               Let's Connect
             </button>
+            
             <Link to="portfolio" smooth={true} duration={500}>
-              <button className=" border-1 px-[1.5rem] py-[0.8rem] text-white hover:bg-white hover:text-black transition-all duration-500 font-semibold">
+              <button className="px-8 py-3 border border-white text-white font-semibold hover:bg-white hover:text-black transition-all duration-300 rounded-sm">
                 Check My Works
               </button>
             </Link>
           </div>
         </section>
+      </div>
 
-        {/* Contact Modal */}
-        {showModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-300 opacity-60">
-            <div className="bg-white rounded-lg p-8 w-full max-w-sm shadow-lg relative font-['Montserrat'] z-50">
-              <button
-                className="absolute top-2 right-3 text-gray-500 hover:text-red-500 text-2xl"
-                onClick={() => setShowModal(false)}
-                aria-label="Close"
-              >
-                &times;
-              </button>
-              <h2 className="text-2xl font-bold mb-4 text-center text-black">
-                Contact Me
-              </h2>
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+      {/* Contact Modal (Fixed Overlay) */}
+      {showModal && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            onClick={() => setShowModal(false)}
+          ></div>
+          
+          {/* Modal Content */}
+          <div className="bg-white rounded-lg p-8 w-full max-w-md shadow-2xl relative z-10 font-['Montserrat'] animate-fadeIn">
+            <button
+              className="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition-colors"
+              onClick={() => setShowModal(false)}
+              aria-label="Close"
+            >
+              <X size={24} />
+            </button>
+            
+            <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+              Get In Touch
+            </h2>
+            
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+              <div>
                 <input
                   type="text"
                   name="name"
@@ -268,38 +204,42 @@ const Hero = () => {
                   value={form.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
                 />
+              </div>
+              <div>
                 <input
                   type="email"
                   name="email"
-                  placeholder="Email"
+                  placeholder="Email Address"
                   value={form.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
                 />
+              </div>
+              <div>
                 <textarea
                   name="message"
-                  placeholder="Your Message"
+                  placeholder="How can I help you?"
                   value={form.message}
                   onChange={handleChange}
                   required
                   rows={4}
-                  className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all resize-none"
                 />
-                <button
-                  type="submit"
-                  className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 font-semibold"
-                >
-                  Send Message
-                </button>
-              </form>
-            </div>
+              </div>
+              
+              <button
+                type="submit"
+                className="w-full bg-[#1b1448] text-white py-3 rounded font-bold hover:bg-blue-900 transition-colors duration-300 shadow-md"
+              >
+                Send Message
+              </button>
+            </form>
           </div>
-        )}
-        {/* ...existing code... */}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
