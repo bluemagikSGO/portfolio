@@ -147,12 +147,12 @@ const Hero = () => {
           data-aos-duration="1000"
         >
           <h1 className="text-4xl md:text-6xl font-bold text-white font-['Montserrat'] leading-tight max-w-4xl">
-            Freelance front-end web developer based in Lagos, Nigeria
+            Freelance full-stack developer based in Lagos, Nigeria
           </h1>
           
           <p className="mt-6 text-lg md:text-xl text-gray-300 font-sans font-medium max-w-2xl">
             Expert development services by a Nigeria-based freelancer for your
-            website and web app needs.
+            website,web app and mobile app needs.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4">
