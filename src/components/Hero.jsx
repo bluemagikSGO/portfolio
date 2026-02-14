@@ -5,7 +5,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import emailjs from "@emailjs/browser";
 import logo from "../assets/programming.png";
-import cv from "/public/gabsteven.pdf";
+const cv = "/gabsteven.pdf";
 
 const Hero = () => {
   const [menu, setMenu] = useState(false);
