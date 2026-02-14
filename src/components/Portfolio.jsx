@@ -1,12 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// We don't need PortList anymore, we will build the card here for better control
-// import PortList from "./PortList";
+import { ArrowUpRight } from "lucide-react";
 
-// Import images
 import portimg from "../assets/metherappy.jpg";
 import portsport from "../assets/sportsloc.jpg";
-import portnova from "../assets/portnova.png";
 import myport from "../assets/myport.png";
 import portItem from "../assets/iteminder.png";
 
@@ -18,6 +15,7 @@ const Portfolio = () => {
       category: "Trip Items Documentation and Reminder",
       image: portItem,
       link: "/iteminder",
+      tech: ["React", "Supabase", "Capacitor"],
     },
     {
       id: 2,
@@ -25,6 +23,7 @@ const Portfolio = () => {
       category: "Tele-Health Platform",
       image: portimg,
       link: "/metherappy",
+      tech: ["React", "Tailwind", "REST APIs"],
     },
     {
       id: 3,
@@ -32,6 +31,7 @@ const Portfolio = () => {
       category: "Sport Facility Discovery and Community",
       image: portsport,
       link: "/sportloc",
+      tech: ["React", "Node.js", "MongoDB"],
     },
     {
       id: 5,
@@ -39,23 +39,24 @@ const Portfolio = () => {
       category: "My Personal Portfolio",
       image: myport,
       link: "/myport",
+      tech: ["React", "Tailwind", "EmailJS"],
     },
   ];
 
   return (
-    <section id="portfolio" className="text-white w-full py-10">
+    <section id="portfolio" className="text-white w-full py-20">
       {/* Divider */}
-      <hr
-        className="w-11/12 max-w-6xl mx-auto border-white/20 mb-10"
-        aria-hidden="true"
-      />
+      <hr className="w-11/12 max-w-6xl mx-auto border-white/10 mb-20" />
 
       {/* Heading */}
-      <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold font-['Montserrat'] mb-2">
+      <div className="text-center mb-16">
+        <p className="text-blue-400 font-semibold font-['Ubuntu'] text-sm tracking-widest uppercase mb-3">
+          Portfolio
+        </p>
+        <h2 className="text-3xl md:text-5xl font-bold font-['Montserrat'] mb-4">
           Featured Projects
         </h2>
-        <p className="text-gray-400">A selection of my recent work</p>
+        <p className="text-gray-400 text-lg">A selection of my recent work</p>
       </div>
 
       {/* Grid Container */}
@@ -66,35 +67,53 @@ const Portfolio = () => {
             to={project.link}
             className="group block w-full h-full"
           >
-            <div className="w-full h-full flex flex-col border border-white/10 rounded-xl overflow-hidden bg-[#1b1448]/50 transition-all duration-300 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-900/20 hover:-translate-y-2">
-              {/* IMAGE CONTAINER - THE FIX IS HERE */}
-              <div className="w-full h-64 overflow-hidden relative">
+            <div className="w-full h-full flex flex-col border border-white/5 rounded-2xl overflow-hidden bg-[#1b1448]/50 transition-all duration-300 hover:border-blue-500/30 hover:shadow-2xl hover:shadow-blue-900/20 hover:-translate-y-2">
+              {/* Image Container */}
+              <div className="w-full h-56 md:h-64 overflow-hidden relative">
                 <img
                   src={project.image}
                   alt={`${project.title} screenshot`}
-                  // object-cover: ensures image fills the box without stretching
-                  // object-top: ensures the top of the website/app is always visible
                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 />
+                {/* Overlay on hover */}
+                <div className="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/10 transition-colors duration-300 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-white/0 group-hover:bg-white/10 flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100">
+                    <ArrowUpRight size={24} className="text-white" />
+                  </div>
+                </div>
               </div>
 
-              {/* TEXT CONTENT */}
+              {/* Text Content */}
               <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold font-['Ubuntu'] mb-2 text-white group-hover:text-blue-400 transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-gray-300 font-['Montserrat'] text-sm">
+                <div className="flex items-start justify-between mb-2">
+                  <h3 className="text-xl font-bold font-['Ubuntu'] text-white group-hover:text-blue-400 transition-colors">
+                    {project.title}
+                  </h3>
+                </div>
+                <p className="text-gray-400 font-['Montserrat'] text-sm mb-4">
                   {project.category}
                 </p>
+
+                {/* Tech tags */}
+                <div className="flex flex-wrap gap-2 mt-auto">
+                  {project.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="px-2.5 py-1 bg-white/5 rounded-md text-xs text-gray-400 font-['Montserrat']"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </Link>
         ))}
       </div>
 
-      {/* Disclaimer / Footer Note */}
+      {/* Disclaimer */}
       <div className="text-center mt-16 px-4">
-        <p className="text-gray-500 font-['Montserrat'] text-sm md:text-base italic border border-white/10 inline-block px-6 py-3 rounded-full bg-black/20">
+        <p className="text-gray-500 font-['Montserrat'] text-sm italic border border-white/5 inline-block px-6 py-3 rounded-full bg-white/[0.02]">
           Note: Due to NDA restrictions, some client projects cannot be publicly
           displayed.
         </p>
