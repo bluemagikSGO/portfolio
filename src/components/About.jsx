@@ -1,6 +1,6 @@
 import React from "react";
 import { Mail, Twitter, Youtube, Linkedin, ArrowUpRight } from "lucide-react";
-import enhancedImage from "../assets/steven.jpg";
+import enhancedImage from "../assets/steven.JPG";
 
 const About = () => {
   const socialLinks = [
