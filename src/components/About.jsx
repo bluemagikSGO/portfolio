@@ -101,8 +101,8 @@ const About = () => {
           </h2>
 
           <p className="text-lg md:text-xl font-medium text-gray-200 font-['Montserrat']">
-            I am passionate about crafting exceptional websites and web
-            applications.
+            I am passionate about crafting exceptional softwares and
+            distribution pipelines.
           </p>
 
           <p className="text-base md:text-lg text-gray-400 font-['Montserrat'] leading-relaxed">
