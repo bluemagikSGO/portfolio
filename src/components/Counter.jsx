@@ -4,8 +4,8 @@ import { Briefcase, FolderOpen, Users, Award } from "lucide-react";
 
 const Counter = () => {
   const stats = [
-    { number: 1, label: "Year of Experience", icon: <Briefcase size={24} /> },
-    { number: 9, label: "Successful Projects", icon: <FolderOpen size={24} /> },
+    { number: 2, label: "Years of Experience", icon: <Briefcase size={24} /> },
+    { number: 20, label: "Successful Projects", icon: <FolderOpen size={24} /> },
     { number: 11, label: "Happy Clients", icon: <Users size={24} /> },
     { number: 1, label: "Award Won", icon: <Award size={24} /> },
   ];
