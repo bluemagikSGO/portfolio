@@ -1,6 +1,6 @@
 import React from "react";
 import TestimonialCard from "./TestimonialList";
-import { Copyright, Mail, ArrowUpRight } from "lucide-react";
+import SiteFooter from "./SiteFooter";
 
 const Testimonials = () => {
   const testimonials = [
@@ -59,33 +59,7 @@ const Testimonials = () => {
         ))}
       </div>
 
-      {/* Footer Section */}
-      <div className="mt-28 border-t border-white/10 pt-12">
-        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-          {/* Email CTA */}
-          <a
-            href="mailto:stevengabriel2015@gmail.com"
-            className="group flex items-center gap-3 text-lg hover:text-blue-400 transition-colors duration-300"
-          >
-            <Mail size={22} />
-            <span className="font-['Montserrat']">
-              stevengabriel2015@gmail.com
-            </span>
-            <ArrowUpRight
-              size={16}
-              className="opacity-0 group-hover:opacity-100 transition-opacity"
-            />
-          </a>
-
-          {/* Copyright */}
-          <footer className="flex items-center gap-2 text-gray-500 text-sm font-['Ubuntu']">
-            <Copyright size={14} />
-            <span>
-              {new Date().getFullYear()} Gabriel Steven O. All rights reserved.
-            </span>
-          </footer>
-        </div>
-      </div>
+      <SiteFooter className="mt-28 border-t border-white/10 pt-12" />
     </section>
   );
 };

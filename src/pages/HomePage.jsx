@@ -4,9 +4,17 @@ import About from "../components/About";
 import Portfolio from "../components/Portfolio";
 import Counter from "../components/Counter";
 import Testimonials from "../components/Testimonials";
-import { FloatButton } from "antd";
+import BackToTop from "../components/BackToTop";
+import usePageMeta from "../hooks/usePageMeta";
 
 const HomePage = () => {
+  usePageMeta({
+    title: "Gabriel Steven — Full-Stack Developer in Lagos",
+    description:
+      "Full-stack developer based in Lagos building performant websites, web apps, and mobile experiences with React, Node.js, and Supabase.",
+    canonicalPath: "/",
+  });
+
   return (
     <div id="homepage">
       <Hero />
@@ -14,7 +22,7 @@ const HomePage = () => {
       <Portfolio />
       <Counter />
       <Testimonials />
-      <FloatButton.BackTop />
+      <BackToTop />
     </div>
   );
 };

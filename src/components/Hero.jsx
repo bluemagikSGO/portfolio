@@ -1,16 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-scroll";
 import { Menu, X, Send, ArrowDown } from "lucide-react";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import emailjs from "@emailjs/browser";
-import logo from "../assets/programming.png";
+import logo from "../assets/programming.webp";
 const cv = "/gabsteven.pdf";
 
 const Hero = () => {
   const [menu, setMenu] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [sending, setSending] = useState(false);
+  const [status, setStatus] = useState(null); // { type: "success" | "error", message }
   const formRef = useRef();
 
   const [form, setForm] = useState({
@@ -18,10 +16,6 @@ const Hero = () => {
     email: "",
     message: "",
   });
-
-  useEffect(() => {
-    AOS.init({ once: true });
-  }, []);
 
   // Close mobile menu on resize
   useEffect(() => {
@@ -46,13 +40,23 @@ const Hero = () => {
 
   const toggleMenu = () => setMenu(!menu);
 
+  const closeModal = () => {
+    setShowModal(false);
+    setStatus(null);
+  };
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Honeypot: bots fill hidden fields, humans never see this one.
+    if (formRef.current.website.value) return;
+
     setSending(true);
+    setStatus(null);
 
     emailjs
       .sendForm(
@@ -63,26 +67,37 @@ const Hero = () => {
       )
       .then(
         () => {
-          alert("Message sent and delivered!");
-          setShowModal(false);
           setForm({ name: "", email: "", message: "" });
           setSending(false);
+          setStatus({
+            type: "success",
+            message: "Message sent — I'll get back to you shortly.",
+          });
+          setTimeout(closeModal, 2500);
         },
         (error) => {
-          console.log(error.text);
-          alert("Failed to send message, please try again.");
+          console.error(error?.text || error);
           setSending(false);
+          setStatus({
+            type: "error",
+            message: "Couldn't send that. Please try again or email me directly.",
+          });
         }
       );
   };
 
   const navItems = ["About", "Portfolio", "Testimonial"];
 
+  // Native smooth scroll — `html { scroll-behavior: smooth }` lives in App.css.
+  const scrollToSection = (id) => {
+    document.getElementById(id)?.scrollIntoView({ block: "start" });
+  };
+
   return (
     <div className="relative w-full h-screen min-h-[600px]">
       {/* Background Image & Overlay */}
-      <div className="absolute inset-0 bg-[url('assets/background.jpg')] bg-cover bg-center bg-no-repeat z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-[#0f0a2a]/70 to-[#0f0a2a]"></div>
+      <div className="absolute inset-0 bg-[url('assets/background.webp')] bg-cover bg-center bg-no-repeat z-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-[#0f0a2a]/88 to-[#0f0a2a]"></div>
       </div>
 
       {/* Main Content Container */}
@@ -92,7 +107,13 @@ const Hero = () => {
           {/* Logo */}
           <div className="text-xl md:text-2xl font-bold text-white font-['Ubuntu']">
             <span className="flex items-center gap-2">
-              <img className="w-10 md:w-12" src={logo} alt="logo" />
+              <img
+                className="w-10 md:w-12"
+                src={logo}
+                alt=""
+                width="48"
+                height="48"
+              />
               <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                 Gabriel Steven
               </span>
@@ -103,16 +124,18 @@ const Hero = () => {
           <div className="hidden md:flex items-center gap-8">
             <ul className="flex gap-8 text-base font-medium text-gray-400 font-['Ubuntu']">
               {navItems.map((item) => (
-                <Link
-                  key={item}
-                  to={item.toLowerCase()}
-                  smooth={true}
-                  duration={500}
-                >
-                  <li className="relative hover:text-white transition-colors duration-300 cursor-pointer after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-blue-400 after:transition-all after:duration-300 hover:after:w-full">
+                <li key={item}>
+                  <a
+                    href={`#${item.toLowerCase()}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(item.toLowerCase());
+                    }}
+                    className="relative block hover:text-white transition-colors duration-300 cursor-pointer after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-blue-400 after:transition-all after:duration-300 hover:after:w-full"
+                  >
                     {item}
-                  </li>
-                </Link>
+                  </a>
+                </li>
               ))}
             </ul>
 
@@ -145,21 +168,20 @@ const Hero = () => {
           }`}
         >
           <ul className="flex flex-col text-lg font-medium text-gray-300 font-['Ubuntu'] p-8 gap-2">
-            {navItems.map((item, index) => (
-              <Link
-                key={item}
-                to={item.toLowerCase()}
-                smooth={true}
-                duration={500}
-                onClick={() => setMenu(false)}
-              >
-                <li
-                  className="hover:text-white hover:bg-white/5 py-4 px-4 rounded-lg cursor-pointer transition-all duration-200"
-                  style={{ animationDelay: `${index * 50}ms` }}
+            {navItems.map((item) => (
+              <li key={item}>
+                <a
+                  href={`#${item.toLowerCase()}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setMenu(false);
+                    scrollToSection(item.toLowerCase());
+                  }}
+                  className="block hover:text-white hover:bg-white/5 py-4 px-4 rounded-lg cursor-pointer transition-all duration-200"
                 >
                   {item}
-                </li>
-              </Link>
+                </a>
+              </li>
             ))}
             <li className="pt-4 px-4">
               <a
@@ -175,11 +197,7 @@ const Hero = () => {
         </div>
 
         {/* Hero Text Content */}
-        <section
-          className="flex-grow flex flex-col items-center justify-center text-center px-6"
-          data-aos="fade-up"
-          data-aos-duration="800"
-        >
+        <section className="flex-grow flex flex-col items-center justify-center text-center px-6 animate-fade-up">
           {/* Status Badge */}
           <div className="mb-8 px-4 py-2 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-sm font-['Ubuntu'] font-medium flex items-center gap-2">
             <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
@@ -196,7 +214,7 @@ const Hero = () => {
             </span>
           </h1>
 
-          <p className="mt-6 text-base sm:text-lg md:text-xl text-gray-400 font-['Montserrat'] font-medium max-w-2xl leading-relaxed">
+          <p className="mt-6 text-base sm:text-lg md:text-xl text-gray-300 font-['Montserrat'] font-medium max-w-2xl leading-relaxed">
             I build performant websites, web apps, and mobile experiences
             that help businesses grow and connect with their audience.
           </p>
@@ -209,11 +227,16 @@ const Hero = () => {
               Let's Connect
             </button>
 
-            <Link to="portfolio" smooth={true} duration={500}>
-              <button className="px-8 py-3.5 border border-white/20 text-white font-semibold hover:bg-white/5 hover:border-white/40 transition-all duration-300 rounded-lg text-sm w-full sm:w-auto">
-                View My Work
-              </button>
-            </Link>
+            <a
+              href="#portfolio"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("portfolio");
+              }}
+              className="px-8 py-3.5 border border-white/20 text-white font-semibold hover:bg-white/5 hover:border-white/40 transition-all duration-300 rounded-lg text-sm text-center"
+            >
+              View My Work
+            </a>
           </div>
 
           {/* Scroll indicator */}
@@ -225,24 +248,32 @@ const Hero = () => {
 
       {/* Contact Modal */}
       {showModal && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="contact-modal-title"
+        >
           {/* Backdrop */}
           <div
             className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-            onClick={() => setShowModal(false)}
+            onClick={closeModal}
           ></div>
 
           {/* Modal Content */}
           <div className="bg-[#1b1448] rounded-2xl p-8 w-full max-w-md shadow-2xl relative z-10 font-['Montserrat'] border border-white/10">
             <button
               className="absolute top-4 right-4 text-gray-400 hover:text-red-400 transition-colors"
-              onClick={() => setShowModal(false)}
+              onClick={closeModal}
               aria-label="Close"
             >
               <X size={22} />
             </button>
 
-            <h2 className="text-2xl font-bold mb-2 text-white font-['Ubuntu']">
+            <h2
+              id="contact-modal-title"
+              className="text-2xl font-bold mb-2 text-white font-['Ubuntu']"
+            >
               Get In Touch
             </h2>
             <p className="text-gray-400 text-sm mb-6">
@@ -250,6 +281,16 @@ const Hero = () => {
             </p>
 
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+              {/* Honeypot — hidden from users, catches bots */}
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="absolute left-[-9999px] w-px h-px opacity-0"
+              />
+
               <input
                 type="text"
                 name="name"
@@ -286,6 +327,20 @@ const Hero = () => {
                 {sending ? "Sending..." : "Send Message"}
                 {!sending && <Send size={16} />}
               </button>
+
+              {status && (
+                <p
+                  role="status"
+                  aria-live="polite"
+                  className={`text-sm text-center rounded-lg px-4 py-3 border ${
+                    status.type === "success"
+                      ? "text-green-400 bg-green-500/10 border-green-500/30"
+                      : "text-red-400 bg-red-500/10 border-red-500/30"
+                  }`}
+                >
+                  {status.message}
+                </p>
+              )}
             </form>
           </div>
         </div>

@@ -1,12 +1,13 @@
 import React from "react";
-import { Mail, Twitter, Youtube, Linkedin, ArrowUpRight } from "lucide-react";
-import enhancedImage from "../assets/steven.JPG";
+import { Mail, Twitter, Github, Linkedin, ArrowUpRight } from "lucide-react";
+import { EMAIL } from "./SiteFooter";
+import enhancedImage from "../assets/steven.webp";
 
 const About = () => {
   const socialLinks = [
     {
       icon: <Mail size={22} />,
-      link: "mailto:stevengabriel2015@gmail.com",
+      link: `mailto:${EMAIL}`,
       label: "Email",
     },
     {
@@ -15,9 +16,9 @@ const About = () => {
       label: "Twitter",
     },
     {
-      icon: <Youtube size={22} />,
-      link: "#",
-      label: "YouTube",
+      icon: <Github size={22} />,
+      link: "https://github.com/bluemagikSGO",
+      label: "GitHub",
     },
     {
       icon: <Linkedin size={22} />,
@@ -57,7 +58,11 @@ const About = () => {
               <div className="overflow-hidden rounded-xl w-full h-[82%] bg-black/20">
                 <img
                   src={enhancedImage}
-                  alt="Gabriel Steven"
+                  alt="Portrait of Gabriel Steven"
+                  loading="lazy"
+                  decoding="async"
+                  width="800"
+                  height="921"
                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
@@ -122,7 +127,7 @@ const About = () => {
           {/* CTA Button */}
           <div className="pt-4 flex justify-center md:justify-start">
             <a
-              href="mailto:stevengabriel2015@gmail.com"
+              href={`mailto:${EMAIL}`}
               className="group inline-flex items-center gap-2 px-8 py-3 bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-all duration-300 font-semibold text-sm shadow-lg shadow-blue-600/20"
             >
               Let's Talk

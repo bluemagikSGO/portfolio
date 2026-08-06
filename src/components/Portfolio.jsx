@@ -1,48 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-
-import portimg from "../assets/metherappy.jpg";
-import portsport from "../assets/sportsloc.jpg";
-import myport from "../assets/myport.png";
-import portItem from "../assets/iteminder.png";
+import { projects } from "../data/projects";
 
 const Portfolio = () => {
-  const projects = [
-    {
-      id: 1,
-      title: "Iteminder",
-      category: "Trip Items Documentation and Reminder",
-      image: portItem,
-      link: "/iteminder",
-      tech: ["React", "Supabase", "Capacitor"],
-    },
-    {
-      id: 2,
-      title: "meTherappy",
-      category: "Tele-Health Platform",
-      image: portimg,
-      link: "/metherappy",
-      tech: ["React", "Tailwind", "REST APIs"],
-    },
-    {
-      id: 3,
-      title: "SportsLoc",
-      category: "Sport Facility Discovery and Community",
-      image: portsport,
-      link: "/sportloc",
-      tech: ["React", "Node.js", "MongoDB"],
-    },
-    {
-      id: 5,
-      title: "Portfolio Site",
-      category: "My Personal Portfolio",
-      image: myport,
-      link: "/myport",
-      tech: ["React", "Tailwind", "EmailJS"],
-    },
-  ];
-
   return (
     <section id="portfolio" className="text-white w-full py-20">
       {/* Divider */}
@@ -63,18 +24,41 @@ const Portfolio = () => {
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-12">
         {projects.map((project) => (
           <Link
-            key={project.id}
-            to={project.link}
+            key={project.slug}
+            to={`/${project.slug}`}
             className="group block w-full h-full"
           >
             <div className="w-full h-full flex flex-col border border-white/5 rounded-2xl overflow-hidden bg-[#1b1448]/50 transition-all duration-300 hover:border-blue-500/30 hover:shadow-2xl hover:shadow-blue-900/20 hover:-translate-y-2">
               {/* Image Container */}
               <div className="w-full h-56 md:h-64 overflow-hidden relative">
-                <img
-                  src={project.image}
-                  alt={`${project.title} screenshot`}
-                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                />
+                {project.image ? (
+                  <img
+                    src={project.image}
+                    alt={`${project.title} — ${project.category}`}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  />
+                ) : project.logo ? (
+                  <div className="w-full h-full bg-[#14102e] flex items-center justify-center">
+                    <img
+                      src={project.logo}
+                      alt={`${project.title} logo`}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-24 h-24 object-contain transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                ) : (
+                  <div
+                    className={`w-full h-full bg-gradient-to-br flex items-center justify-center ${project.accent.glow}`}
+                  >
+                    <span className="text-3xl font-bold font-['Ubuntu'] text-white/90 px-6 text-center">
+                      {project.cardTitle || project.title}
+                    </span>
+                  </div>
+                )}
+
                 {/* Overlay on hover */}
                 <div className="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/10 transition-colors duration-300 flex items-center justify-center">
                   <div className="w-12 h-12 rounded-full bg-white/0 group-hover:bg-white/10 flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100">
@@ -87,7 +71,7 @@ const Portfolio = () => {
               <div className="p-6 flex flex-col flex-grow">
                 <div className="flex items-start justify-between mb-2">
                   <h3 className="text-xl font-bold font-['Ubuntu'] text-white group-hover:text-blue-400 transition-colors">
-                    {project.title}
+                    {project.cardTitle || project.title}
                   </h3>
                 </div>
                 <p className="text-gray-400 font-['Montserrat'] text-sm mb-4">
@@ -96,7 +80,7 @@ const Portfolio = () => {
 
                 {/* Tech tags */}
                 <div className="flex flex-wrap gap-2 mt-auto">
-                  {project.tech.map((t) => (
+                  {project.cardTech.map((t) => (
                     <span
                       key={t}
                       className="px-2.5 py-1 bg-white/5 rounded-md text-xs text-gray-400 font-['Montserrat']"
