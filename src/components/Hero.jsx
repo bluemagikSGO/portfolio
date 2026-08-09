@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { Menu, X, Send, ArrowDown } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import logo from "../assets/programming.webp";
-const cv = "/gabsteven.pdf";
+// .docx can't render in a browser tab, so the CV links are explicit downloads.
+const cv = "/Gabriel_Steven_CV.docx";
 
 const Hero = () => {
   const [menu, setMenu] = useState(false);
@@ -141,8 +142,7 @@ const Hero = () => {
 
             <a
               href={cv}
-              target="_blank"
-              rel="noopener noreferrer"
+              download
               className="border border-blue-500/50 px-6 py-2.5 text-blue-400 hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-all duration-300 font-semibold rounded-lg text-sm"
             >
               Download CV
@@ -186,8 +186,7 @@ const Hero = () => {
             <li className="pt-4 px-4">
               <a
                 href={cv}
-                target="_blank"
-                rel="noopener noreferrer"
+                download
                 className="inline-block border border-blue-500/50 px-6 py-2.5 text-blue-400 hover:bg-blue-500 hover:text-white transition-all duration-300 font-semibold rounded-lg text-sm"
               >
                 Download CV
