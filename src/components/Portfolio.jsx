@@ -31,9 +31,18 @@ const Portfolio = () => {
             <div className="w-full h-full flex flex-col border border-white/5 rounded-2xl overflow-hidden bg-[#1b1448]/50 transition-all duration-300 hover:border-blue-500/30 hover:shadow-2xl hover:shadow-blue-900/20 hover:-translate-y-2">
               {/* Image Container */}
               <div className="w-full h-56 md:h-64 overflow-hidden relative">
-                {project.image ? (
+                {project.status && (
+                  <span
+                    className={`absolute top-3 right-3 z-10 px-3 py-1 rounded-full border text-[11px] font-semibold tracking-wide uppercase backdrop-blur-sm flex items-center gap-1.5 ${project.accent.badge}`}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse"></span>
+                    {project.status}
+                  </span>
+                )}
+
+                {project.cardImage || project.image ? (
                   <img
-                    src={project.image}
+                    src={project.cardImage || project.image}
                     alt={`${project.title} — ${project.category}`}
                     loading="lazy"
                     decoding="async"

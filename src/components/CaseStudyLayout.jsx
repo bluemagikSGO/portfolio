@@ -369,9 +369,12 @@ const CaseStudyLayout = ({ project }) => {
       {/* Hero */}
       <section className="flex flex-col items-center py-16 px-6">
         <div
-          className={`mb-4 px-4 py-1.5 rounded-full border text-xs font-semibold tracking-wider uppercase ${accent.badge}`}
+          className={`mb-4 px-4 py-1.5 rounded-full border text-xs font-semibold tracking-wider uppercase flex items-center gap-2 ${accent.badge}`}
         >
-          Case Study
+          {project.status && (
+            <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse"></span>
+          )}
+          {project.status || "Case Study"}
         </div>
         <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center font-['Ubuntu']">
           {project.title}

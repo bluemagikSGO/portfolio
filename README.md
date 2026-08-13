@@ -27,7 +27,10 @@ An entry needs:
 | `slug` | URL path, e.g. `iteminder` → `/iteminder` |
 | `title`, `category`, `tagline` | Headline copy |
 | `cardTitle` | Optional shorter title for the home page card |
-| `image` | Imported WebP; `null` renders a gradient placeholder |
+| `status` | Optional pill, e.g. `"In Development"`. Replaces the "Case Study" badge and adds a marker to the card. Omit for shipped work |
+| `image` | Hero image. `null` falls back to `logo`, then to a gradient placeholder |
+| `logo` | Square transparent mark, shown as an app-icon tile when there is no `image` |
+| `cardImage` | Optional override for the home page card only |
 | `cardTech` | Tags shown on the home page card |
 | `accent` | Full Tailwind class strings for the page's accent colour |
 | `links` | Buttons in the hero (`primary` / `outline` / `dark`) |

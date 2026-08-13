@@ -1,3 +1,9 @@
+import tbaLogo from "../assets/tba-logo.webp";
+import tbaLanding from "../assets/tba-landing.webp";
+import tbaFeatures from "../assets/tba-features.webp";
+import tbaPreview from "../assets/tba-preview.webp";
+import tbaPricing from "../assets/tba-pricing.webp";
+
 import mybabeLogo from "../assets/mybabe-logo.webp";
 import mybabeAppstore from "../assets/mybabe-appstore.webp";
 import mybabeChat from "../assets/mybabe-chat.webp";
@@ -30,6 +36,157 @@ import portapp3 from "../assets/portapp3.webp";
  * for complete class strings — never build them by concatenation.
  */
 export const projects = [
+  {
+    slug: "textback-advisor",
+    title: "Textback Advisor",
+    category: "AI Communication Coach",
+    status: "In Development",
+    tagline:
+      "Know exactly what to text back. Share or paste any message, pick a tone, and get confident replies for dating, work, and every conversation in between.",
+    image: null, // app is pre-launch — the hero uses the logo tile
+    logo: tbaLogo,
+    cardImage: tbaLanding,
+    cardTech: ["Expo", "Next.js", "Neon"],
+    accent: {
+      badge: "border-cyan-500/30 bg-cyan-500/10 text-cyan-300",
+      glow: "from-teal-400 to-cyan-600",
+      bar: "border-teal-400",
+      icon: "text-teal-400",
+      arrow: "text-cyan-400",
+    },
+    links: [
+      {
+        label: "Visit Site",
+        href: "https://textbackadvisor.com",
+        icon: "ExternalLink",
+        style: "primary",
+      },
+    ],
+    overview:
+      "Textback Advisor turns the message you don't know how to answer into one you do. Paste or share any text — a dating opener, a tense work thread, an apology, a boundary you need to hold — pick a tone, goal and boldness, and it returns an advisor read of what the message is actually asking for alongside several natural replies you can send as-is. It is deliberately positioned as a general communication coach rather than a dating app: work, family and conflict conversations are the bulk of the need. The iOS app is built in Expo, backed by a Next.js API on Neon Postgres, with every AI call running server-side.",
+    sections: [
+      {
+        type: "twoCol",
+        left: {
+          title: "My Role",
+          iconClass: "text-teal-400",
+          items: [
+            {
+              icon: "Sparkles",
+              label: "Founder:",
+              text: "Set the product vision, positioning and pricing, and wrote the master plan the build follows.",
+            },
+            {
+              icon: "Smartphone",
+              label: "Mobile:",
+              text: "Built the Expo iOS app — design system, 14-screen onboarding funnel, and the threaded reply flow.",
+            },
+            {
+              icon: "Code",
+              label: "Backend:",
+              text: "Built the Next.js API, Drizzle schema, and the server-side AI pipeline on Neon Postgres.",
+            },
+            {
+              icon: "Lock",
+              label: "Security:",
+              text: "Designed the two-layer data isolation model and the anonymous-to-real account linking flow.",
+            },
+            {
+              icon: "Paintbrush",
+              label: "Brand & Web:",
+              text: "Designed and shipped the landing page, brand palette, and app iconography.",
+            },
+          ],
+        },
+        right: {
+          title: "Core Features",
+          items: [
+            {
+              icon: "Brain",
+              text: "An advisor read of the situation, plus three to five labelled reply options",
+            },
+            {
+              icon: "Layout",
+              text: "Tone, goal and boldness controls that shape every suggestion",
+            },
+            {
+              icon: "MessageSquare",
+              text: "Threaded conversations — the advisor carries context from turn to turn",
+            },
+            {
+              icon: "Users",
+              text: "Screenshot a chat and get the read without retyping anything",
+            },
+            {
+              icon: "Heart",
+              text: "Saved replies and history grouped by whose turn it is, not by date",
+            },
+          ],
+        },
+      },
+      {
+        type: "tech",
+        items: [
+          "Expo (React Native)",
+          "expo-router",
+          "TypeScript",
+          "Next.js",
+          "Neon Postgres",
+          "Drizzle ORM",
+          "better-auth",
+          "DeepSeek",
+          "RevenueCat",
+          "Vercel",
+          "EAS Build",
+          "Tailwind CSS",
+        ],
+      },
+      {
+        type: "gallery",
+        title: "Landing Page",
+        images: [
+          {
+            src: tbaFeatures,
+            alt: "Textback Advisor features grid covering reply generation, meaning analysis and tone selection",
+          },
+          {
+            src: tbaPreview,
+            alt: "Textback Advisor product preview showing the advisor read and reply options",
+          },
+          {
+            src: tbaPricing,
+            alt: "Textback Advisor pricing section showing weekly and annual plans",
+          },
+        ],
+      },
+      {
+        type: "compare",
+        left: {
+          title: "Challenges & Learnings",
+          titleClass: "text-red-400",
+          markerClass: "text-red-400",
+          items: [
+            "Neon's default database role carries BYPASSRLS, which silently defeats every row-level security policy. It only surfaced by writing an isolation test that seeds two users and asserts five ways they cannot reach each other's data.",
+            "Enforcing a free tier without a sign-up meant creating a real anonymous user on first launch, then merging that account on sign-in — signing in must never look like data loss.",
+            "The auth library's anonymous linking hook never fires on native, because the callback arrives from the system browser with no session cookie. Replaced with an endpoint that requires two independent proofs of identity.",
+            "Running the usage check before inference, so a request over the limit costs nothing, and writing the conversation, replies and usage event in one transaction.",
+            "Keeping the positioning general rather than dating-first — enforced through the ordering and defaults of every list in the UI, not just the marketing copy.",
+          ],
+        },
+        right: {
+          title: "What's Next?",
+          titleClass: "text-green-400",
+          markerClass: "text-green-400",
+          items: [
+            "RevenueCat subscriptions wired through to StoreKit.",
+            "An iOS share extension — send a screenshot straight from iMessage or Instagram into the app.",
+            "TestFlight beta, then App Store submission.",
+            "Android from the same Expo codebase.",
+          ],
+        },
+      },
+    ],
+  },
   {
     slug: "mybabe",
     title: "MyBabe AI",
