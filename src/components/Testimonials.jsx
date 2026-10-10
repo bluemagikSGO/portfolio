@@ -1,67 +1,65 @@
-import React from "react";
-import TestimonialCard from "./TestimonialList";
-import SiteFooter from "./SiteFooter";
+import Reveal from "./Reveal";
 
-const Testimonials = () => {
-  const testimonials = [
-    {
-      id: 1,
-      name: "Donald",
-      role: "Client",
-      comment:
-        "Steven is an easy-to-work-with developer and he really knows how to make complicated tasks come alive. I recommend him.",
-    },
-    {
-      id: 2,
-      name: "Seyifunmi",
-      role: "Product Designer",
-      comment:
-        "A good frontend developer with creative eyes for simplified UX. I enjoy working with Steve.",
-    },
-    {
-      id: 3,
-      name: "Ruben",
-      role: "Entrepreneur",
-      comment:
-        "A friend recommended Steve and I must confess, I wish I had known him a while ago. My projects are done exactly to my taste with the right attention to details.",
-    },
-  ];
+// Verbatim, as given by each person.
+const TESTIMONIALS = [
+  {
+    name: "Donald",
+    role: "Client",
+    quote:
+      "Steven is an easy-to-work-with developer and he really knows how to make complicated tasks come alive. I recommend him.",
+  },
+  {
+    name: "Seyifunmi",
+    role: "Product Designer",
+    quote:
+      "A good frontend developer with creative eyes for simplified UX. I enjoy working with Steve.",
+  },
+  {
+    name: "Ruben",
+    role: "Entrepreneur",
+    quote:
+      "A friend recommended Steve and I must confess, I wish I had known him a while ago. My projects are done exactly to my taste with the right attention to details.",
+  },
+];
 
-  return (
-    <section id="testimonial" className="text-white w-full py-20">
-      {/* Divider */}
-      <hr className="w-11/12 max-w-6xl mx-auto border-white/10 mb-20" />
-
-      {/* Heading */}
-      <div className="text-center mb-16 px-4">
-        <p className="text-blue-400 font-semibold font-['Ubuntu'] text-sm tracking-widest uppercase mb-3">
-          Testimonials
+const Testimonials = () => (
+  <section
+    id="testimonials"
+    aria-labelledby="testimonials-title"
+    className="border-t border-line"
+  >
+    <div className="wrap py-24 sm:py-32">
+      <div className="grid gap-y-6 lg:grid-cols-12 lg:gap-x-10">
+        <p className="label flex gap-4 text-subtle lg:col-span-3 lg:pt-3">
+          <span>04</span>
+          <span>Kind words</span>
         </p>
-        <h2 className="text-3xl md:text-5xl font-bold font-['Montserrat'] mb-4">
-          What Clients Say
+        <h2 id="testimonials-title" className="heading text-[clamp(2.25rem,5vw,4.25rem)] lg:col-span-9">
+          From people I've worked with.
         </h2>
-        <p className="text-gray-400 text-lg max-w-xl mx-auto">
-          Real feedback from people I've had the pleasure of working with
-        </p>
       </div>
 
-      {/* Grid Container */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-10">
-        {testimonials.map((item, index) => (
-          <div key={item.id} className="h-full">
-            <TestimonialCard
-              comment={item.comment}
-              clientName={item.name}
-              role={item.role}
-              index={index}
-            />
-          </div>
+      <ul className="mt-16 grid gap-y-12 sm:mt-20 md:grid-cols-3 md:gap-x-10">
+        {TESTIMONIALS.map((t, i) => (
+          <Reveal as="li" key={t.name} delay={i * 80} className="border-t border-ink pt-8">
+            <figure className="flex h-full flex-col">
+              <blockquote className="font-serif text-[1.375rem] leading-[1.35] tracking-[-0.01em]">
+                <p>
+                  <span aria-hidden="true" className="-ml-[0.4em] text-accent">“</span>
+                  {t.quote}
+                  <span aria-hidden="true" className="text-accent">”</span>
+                </p>
+              </blockquote>
+              <figcaption className="mt-8 text-[14px]">
+                <span className="font-medium">{t.name}</span>
+                <span className="text-subtle">, {t.role}</span>
+              </figcaption>
+            </figure>
+          </Reveal>
         ))}
-      </div>
-
-      <SiteFooter className="mt-28 border-t border-white/10 pt-12" />
-    </section>
-  );
-};
+      </ul>
+    </div>
+  </section>
+);
 
 export default Testimonials;

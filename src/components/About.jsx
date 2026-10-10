@@ -1,146 +1,135 @@
-import React from "react";
-import { Mail, Twitter, Github, Linkedin, ArrowUpRight } from "lucide-react";
-import { EMAIL } from "./SiteFooter";
-import enhancedImage from "../assets/steven.webp";
+import Reveal from "./Reveal";
+import { ArrowLink } from "./ui";
+import { SITE } from "../config/site";
+import portrait480 from "../assets/steven-480.webp";
+import portrait800 from "../assets/steven-800.webp";
 
-const About = () => {
-  const socialLinks = [
-    {
-      icon: <Mail size={22} />,
-      link: `mailto:${EMAIL}`,
-      label: "Email",
-    },
-    {
-      icon: <Twitter size={22} />,
-      link: "https://x.com/bluemagikSGO",
-      label: "Twitter",
-    },
-    {
-      icon: <Github size={22} />,
-      link: "https://github.com/bluemagikSGO",
-      label: "GitHub",
-    },
-    {
-      icon: <Linkedin size={22} />,
-      link: "https://www.linkedin.com/in/steven-gabriel-059345371/",
-      label: "LinkedIn",
-    },
-  ];
+const EXPERIENCE = [
+  {
+    when: "2026 — Present",
+    what: "Founder, MyBabe AI",
+    detail: "AI companion app on iOS and Android, built solo.",
+  },
+  {
+    when: "Present",
+    what: "CEO, Iteminder LTD",
+    detail: "Software studio that builds and scales apps.",
+  },
+  {
+    when: "2024 — Present",
+    what: "Freelance frontend developer",
+    detail: "Websites and web apps for businesses and agencies.",
+  },
+  {
+    when: "2025",
+    what: "Frontend Web Development Bootcamp",
+    detail: "Appclick Academy, Ibadan.",
+  },
+];
 
-  const skills = [
-    "React.js",
-    "Next.js",
-    "Tailwind CSS",
-    "Node.js",
-    "TypeScript",
-    "MongoDB",
-    "PostgreSQL",
-    "Supabase",
-    "Firebase",
-    "Git",
-  ];
+const TOOLBOX = [
+  { k: "Languages", v: "JavaScript, TypeScript" },
+  { k: "Web", v: "React, Next.js, Tailwind CSS" },
+  { k: "Mobile", v: "React Native, Expo" },
+  { k: "Backend", v: "Node.js, Supabase, Postgres, Prisma" },
+  { k: "Auth and payments", v: "Clerk, Better Auth, RevenueCat" },
+  { k: "AI", v: "Gemini, Claude, OpenAI, LiveKit" },
+];
 
-  return (
-    <section
-      id="about"
-      className="w-full py-24 px-6 md:px-20 lg:px-32 text-white flex justify-center items-center"
-    >
-      <div className="max-w-6xl w-full flex flex-col md:flex-row gap-16 md:gap-20 items-center">
-        {/* Left Side: Image Card */}
-        <div className="relative w-full md:w-5/12 flex justify-center">
-          <div className="relative w-full max-w-[360px]">
-            {/* Glow effect */}
-            <div className="absolute -inset-1 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl blur opacity-20"></div>
+const About = () => (
+  <section id="about" aria-labelledby="about-title" className="wrap py-24 sm:py-32">
+    <div className="grid gap-y-14 lg:grid-cols-12 lg:gap-x-10">
+      <div className="lg:col-span-3">
+        <p className="label flex gap-4 text-subtle">
+          <span>03</span>
+          <span>About</span>
+        </p>
+      </div>
 
-            {/* Card Container */}
-            <div className="relative bg-[#1b1448] w-full aspect-[4/5] rounded-2xl border border-white/5 shadow-2xl p-5 group overflow-hidden">
-              {/* Image */}
-              <div className="overflow-hidden rounded-xl w-full h-[82%] bg-black/20">
-                <img
-                  src={enhancedImage}
-                  alt="Portrait of Gabriel Steven"
-                  loading="lazy"
-                  decoding="async"
-                  width="800"
-                  height="921"
-                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-
-              {/* Social Icons Row */}
-              <div className="w-full h-[18%] flex items-center justify-around px-2">
-                {socialLinks.map((item, index) => (
-                  <a
-                    key={index}
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={item.label}
-                    className="text-gray-500 hover:text-blue-400 hover:-translate-y-1 transition-all duration-300"
-                  >
-                    {item.icon}
-                  </a>
-                ))}
-              </div>
+      <div className="lg:col-span-9">
+        <div className="grid gap-y-12 md:grid-cols-9 md:gap-x-10">
+          <Reveal as="figure" className="md:col-span-4">
+            <div className="overflow-hidden rounded-[4px] bg-[#6f7174]">
+              <img
+                src={portrait800}
+                srcSet={`${portrait480} 480w, ${portrait800} 800w`}
+                sizes="(min-width: 1024px) 26vw, (min-width: 768px) 40vw, 100vw"
+                width="800"
+                height="921"
+                alt={`Portrait of ${SITE.name}`}
+                loading="lazy"
+                decoding="async"
+                className="block h-auto w-full"
+              />
             </div>
-          </div>
+            <figcaption className="mt-3 flex justify-between text-[13px] text-subtle">
+              <span>{SITE.fullName}</span>
+              <span>Lagos</span>
+            </figcaption>
+          </Reveal>
+
+          <Reveal delay={60} className="md:col-span-5">
+            <h2 id="about-title" className="heading text-[clamp(2.25rem,4.4vw,3.75rem)]">
+              I like owning the whole problem.
+            </h2>
+            <div className="mt-8 space-y-5 text-[17px] leading-relaxed text-muted">
+              <p>
+                I'm {SITE.fullName}, Steven Gabriel to most people: a software
+                engineer in Ikeja, Lagos. Since January 2024 I've built websites
+                and web apps as a freelance frontend developer, working directly
+                with businesses and agencies to turn loose requirements into
+                interfaces that ship.
+              </p>
+              <p>
+                In 2026 I founded MyBabe AI and built it on my own: the Supabase
+                backend and streaming chat engine, a voice-call pipeline on
+                self-hosted LiveKit, the subscriptions and the store listings. It
+                is live on iOS and Android and is now the first product of
+                Iteminder, the studio I run.
+              </p>
+              <p>
+                I'm most comfortable owning a product end to end, from backend
+                architecture and AI integration to App Store launch, growth and
+                iteration.
+              </p>
+            </div>
+            <div className="mt-8">
+              <ArrowLink href={SITE.cv}>Download my CV (PDF)</ArrowLink>
+            </div>
+          </Reveal>
         </div>
 
-        {/* Right Side: Text Content */}
-        <div className="w-full md:w-7/12 flex flex-col gap-6 text-center md:text-left">
-          <p className="text-blue-400 font-semibold font-['Ubuntu'] text-sm tracking-widest uppercase">
-            About Me
-          </p>
+        <div className="mt-20 grid gap-y-14 md:grid-cols-9 md:gap-x-10">
+          <Reveal className="md:col-span-5">
+            <h3 className="label text-subtle">Experience</h3>
+            <ol className="mt-5 border-t border-line">
+              {EXPERIENCE.map((e) => (
+                <li key={e.what} className="grid gap-x-6 gap-y-1 border-b border-line py-4 sm:grid-cols-[8.5rem_1fr]">
+                  <span className="text-[14px] text-subtle tabular-nums">{e.when}</span>
+                  <div>
+                    <p className="text-[16px] font-medium">{e.what}</p>
+                    <p className="mt-1 text-[15px] text-muted">{e.detail}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </Reveal>
 
-          <h2 className="text-3xl md:text-5xl font-bold font-['Ubuntu'] leading-tight">
-            Hi, I'm{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-              Gabriel Steven
-            </span>
-            .
-          </h2>
-
-          <p className="text-lg md:text-xl font-medium text-gray-200 font-['Montserrat']">
-            I am passionate about crafting exceptional softwares and
-            distribution pipelines.
-          </p>
-
-          <p className="text-base md:text-lg text-gray-400 font-['Montserrat'] leading-relaxed">
-            With a blend of design skills and coding expertise, I create unique
-            online experiences that captivate users. Looking for a top-notch web
-            developer to revamp your website? I can take your site or app to the
-            next level, helping you attract more visitors and boost your reach.
-          </p>
-
-          {/* Skills */}
-          <div className="flex flex-wrap gap-2 justify-center md:justify-start mt-2">
-            {skills.map((skill) => (
-              <span
-                key={skill}
-                className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs font-semibold text-gray-300 font-['Montserrat']"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-
-          {/* CTA Button */}
-          <div className="pt-4 flex justify-center md:justify-start">
-            <a
-              href={`mailto:${EMAIL}`}
-              className="group inline-flex items-center gap-2 px-8 py-3 bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-all duration-300 font-semibold text-sm shadow-lg shadow-blue-600/20"
-            >
-              Let's Talk
-              <ArrowUpRight
-                size={16}
-                className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-              />
-            </a>
-          </div>
+          <Reveal delay={60} className="md:col-span-4">
+            <h3 className="label text-subtle">Toolbox</h3>
+            <dl className="mt-5 border-t border-line">
+              {TOOLBOX.map((t) => (
+                <div key={t.k} className="border-b border-line py-4">
+                  <dt className="text-[14px] text-subtle">{t.k}</dt>
+                  <dd className="mt-1 text-[15px]">{t.v}</dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
         </div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default About;

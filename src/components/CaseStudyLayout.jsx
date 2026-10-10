@@ -1,466 +1,218 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Bell,
-  Brain,
-  Calendar,
-  Code,
-  Download,
-  ExternalLink,
-  Github,
-  Heart,
-  Layout,
-  Lock,
-  MapPin,
-  MessageSquare,
-  Mic,
-  Paintbrush,
-  Shield,
-  Smartphone,
-  Sparkles,
-  UserCheck,
-  Users,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";
+import Reveal from "./Reveal";
+import { ArrowLink, Shot } from "./ui";
+import { getNextProject, projects } from "../data/projects";
+import { pad } from "../lib/pad";
 
-const ICONS = {
-  ArrowRight,
-  Bell,
-  Brain,
-  Calendar,
-  Code,
-  Download,
-  ExternalLink,
-  Github,
-  Heart,
-  Layout,
-  Lock,
-  MapPin,
-  MessageSquare,
-  Mic,
-  Paintbrush,
-  Shield,
-  Smartphone,
-  Sparkles,
-  UserCheck,
-  Users,
-};
-
-const LINK_STYLES = {
-  primary:
-    "bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/20",
-  outline: "border border-white/20 hover:bg-white/5 hover:border-white/40 text-white",
-  dark: "bg-black hover:bg-gray-900 text-white border border-white/20",
-};
-
-/** Renders `**bold**` spans inside a data-file paragraph. */
-const renderEmphasis = (text) =>
-  text.split(/(\*\*[^*]+\*\*)/g).map((chunk, i) =>
-    chunk.startsWith("**") && chunk.endsWith("**") ? (
-      <strong key={i} className="text-white">
-        {chunk.slice(2, -2)}
-      </strong>
-    ) : (
-      chunk
-    )
-  );
-
-/** A panel list item: plain string, or { icon, label, text }. */
-const PanelItem = ({ item, iconClass, defaultIcon }) => {
-  const isObject = typeof item === "object";
-  const Icon = ICONS[isObject ? item.icon : defaultIcon] || ArrowRight;
-
-  return (
-    <li className="flex gap-3 items-start">
-      <Icon size={16} className={`${iconClass} mt-1 shrink-0`} />
-      <span>
-        {isObject && item.label && (
-          <strong className="text-white">{item.label} </strong>
-        )}
-        {isObject ? item.text : item}
-      </span>
-    </li>
-  );
-};
-
-const Panel = ({ panel, fallbackIconClass, accent }) => (
-  <div className="bg-[#1b1448] p-8 rounded-2xl border border-white/5">
-    <h2 className="text-2xl font-bold mb-6 font-['Ubuntu']">{panel.title}</h2>
-
-    {panel.items && (
-      <ul className="space-y-4 text-gray-300">
-        {panel.items.map((item, i) => (
-          <PanelItem
-            key={i}
-            item={item}
-            iconClass={panel.iconClass || fallbackIconClass}
-            defaultIcon="ArrowRight"
-          />
-        ))}
-      </ul>
-    )}
-
-    {panel.tags && (
-      <div className="flex flex-wrap gap-3 mb-6">
-        {panel.tags.map((tag) => (
-          <span
-            key={tag}
-            className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-sm font-semibold hover:bg-white/10 transition-colors cursor-default"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-    )}
-
-    {panel.subItems && (
-      <div className="pt-6 border-t border-white/10">
-        <h3 className="font-bold mb-3 text-gray-200 font-['Ubuntu']">
-          {panel.subTitle}
-        </h3>
-        <ul className="space-y-2 text-gray-400 text-sm">
-          {panel.subItems.map((item) => (
-            <li key={item} className="flex items-center gap-2">
-              <ArrowRight size={14} className={accent.arrow} />
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
-    )}
-  </div>
+/** Every section sits on the same 3 / 9 grid: a heading rail and the content. */
+const Row = ({ title, children }) => (
+  <section className="border-t border-line py-14 sm:py-20">
+    <div className="grid gap-y-8 lg:grid-cols-12 lg:gap-x-10">
+      <h2 className="heading text-[1.75rem] lg:col-span-3">{title}</h2>
+      <div className="lg:col-span-9">{children}</div>
+    </div>
+  </section>
 );
 
-const Section = ({ section, accent }) => {
-  switch (section.type) {
-    case "twoCol":
-      return (
-        <section className="max-w-6xl mx-auto py-10 px-6">
-          <div className="grid md:grid-cols-2 gap-8 items-start">
-            <Panel
-              panel={section.left}
-              fallbackIconClass="text-blue-500"
-              accent={accent}
-            />
-            <Panel
-              panel={section.right}
-              fallbackIconClass={accent.icon}
-              accent={accent}
-            />
-          </div>
-        </section>
-      );
-
-    case "tech":
-      return (
-        <section className="max-w-4xl mx-auto py-10 px-6 text-center">
-          <h2 className="text-2xl font-bold mb-8 font-['Ubuntu']">
-            Technologies Used
-          </h2>
-          <div className="flex flex-wrap justify-center gap-3">
-            {section.items.map((tech) => (
-              <span
-                key={tech}
-                className="px-5 py-2 bg-white/5 border border-white/10 rounded-lg text-sm font-semibold hover:bg-white/10 transition-colors cursor-default"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </section>
-      );
-
-    case "gallery": {
-      const Icon = section.icon ? ICONS[section.icon] : null;
-      const isCode = section.variant === "code";
-      const isPhone = section.variant === "phone";
-
-      // Portrait phone shots need a narrower, centred track -- stretching them
-      // across a 3-column grid makes them comically tall.
-      if (isPhone) {
+const ListSection = ({ section }) => (
+  <Row title={section.title}>
+    <ul className="border-t border-line">
+      {section.items.map((item, i) => {
+        const isObject = typeof item === "object";
         return (
-          <section className="max-w-4xl mx-auto py-12 px-6">
-            <h2 className="text-3xl font-bold mb-10 text-center flex items-center justify-center gap-3 font-['Ubuntu']">
-              {Icon && <Icon size={24} />}
-              {section.title}
-            </h2>
-            {/* Matched on height, not width, so shots cropped at different
-                aspect ratios still line up as a row of phones. */}
-            <div className="flex flex-wrap justify-center items-start gap-10">
-              {section.images.map((img, i) => (
-                <figure key={i} className="flex flex-col items-center">
-                  <img
-                    src={img.src}
-                    alt={img.alt}
-                    loading="lazy"
-                    decoding="async"
-                    className="h-[380px] sm:h-[460px] w-auto rounded-2xl border border-white/10 shadow-2xl"
-                  />
-                  {img.caption && (
-                    <figcaption className="mt-4 text-center text-sm text-gray-400 max-w-[240px]">
-                      {img.caption}
-                    </figcaption>
-                  )}
-                </figure>
-              ))}
-            </div>
-          </section>
-        );
-      }
-
-      return (
-        <section className="max-w-7xl mx-auto py-12 px-6">
-          <h2 className="text-3xl font-bold mb-10 text-center flex items-center justify-center gap-3 font-['Ubuntu']">
-            {Icon && <Icon size={24} />}
-            {section.title}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {section.images.map((img, i) =>
-              isCode ? (
-                <div
-                  key={i}
-                  className="bg-black/40 p-2 rounded-xl border border-white/10"
-                >
-                  <img
-                    src={img.src}
-                    alt={img.alt}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full rounded-lg opacity-85 hover:opacity-100 transition-opacity"
-                  />
-                </div>
-              ) : (
-                <div
-                  key={i}
-                  className="rounded-2xl overflow-hidden border border-white/10 shadow-lg hover:scale-[1.02] transition-transform duration-500"
-                >
-                  <img
-                    src={img.src}
-                    alt={img.alt}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              )
-            )}
-          </div>
-        </section>
-      );
-    }
-
-    case "narrative":
-      return (
-        <section className="max-w-6xl mx-auto py-12 px-6">
-          <h2
-            className={`text-3xl font-bold mb-8 border-l-4 border-red-500 pl-4 font-['Ubuntu']`}
+          <li
+            key={i}
+            className="grid gap-x-10 gap-y-1 border-b border-line py-4 text-[16px] leading-relaxed sm:grid-cols-[11rem_1fr] sm:text-[17px]"
           >
-            {section.title}
-          </h2>
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="space-y-6 text-gray-300">
-              {section.paragraphs.map((p, i) => (
-                <p key={i}>{renderEmphasis(p)}</p>
-              ))}
+            {isObject ? (
+              <>
+                <span className="font-medium">{item.label}</span>
+                <span className="text-muted">{item.text}</span>
+              </>
+            ) : (
+              <span className="text-muted sm:col-span-2">{item}</span>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  </Row>
+);
 
-              {section.list && (
-                <>
-                  <h3 className="text-xl font-bold text-white mt-6 font-['Ubuntu']">
-                    {section.listTitle}
-                  </h3>
-                  <ul className="space-y-2">
-                    {section.list.map((item, i) => (
-                      <li key={i} className="flex gap-3 items-start">
-                        <span className={`${accent.arrow} mt-1 shrink-0`}>-</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              )}
-            </div>
+const Gallery = ({ section }) => {
+  if (section.variant === "phone") {
+    return (
+      <Row title={section.title}>
+        <ul
+          className={`grid grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-8 ${
+            section.images.length > 2 ? "md:grid-cols-4" : "md:max-w-[36rem]"
+          }`}
+        >
+          {section.images.map((img, i) => (
+            <Reveal as="li" key={i} delay={i * 60}>
+              <figure>
+                <Shot image={img} sizes="(min-width: 768px) 220px, 45vw" className="rounded-[10px]" />
+                {img.caption && (
+                  <figcaption className="mt-3 text-[13px] text-subtle">{img.caption}</figcaption>
+                )}
+              </figure>
+            </Reveal>
+          ))}
+        </ul>
+      </Row>
+    );
+  }
 
-            <div className="grid gap-4 content-start">
-              <div className="bg-black/40 p-2 rounded-xl border border-white/10">
-                <img
-                  src={section.images[0].src}
-                  alt={section.images[0].alt}
-                  loading="lazy"
-                  decoding="async"
-                  className="rounded-lg w-full opacity-85 hover:opacity-100 transition-opacity"
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                {section.images.slice(1).map((img, i) => (
-                  <img
-                    key={i}
-                    src={img.src}
-                    alt={img.alt}
-                    loading="lazy"
-                    decoding="async"
-                    className="rounded-xl border border-white/10 opacity-85 hover:opacity-100 transition-opacity"
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-      );
-
-    case "compare":
-      return (
-        <section className="max-w-6xl mx-auto py-10 px-6">
-          <div className="grid md:grid-cols-2 gap-8">
-            {[section.left, section.right].map((panel, i) => (
-              <div
-                key={i}
-                className="bg-[#1b1448]/50 p-8 rounded-2xl border border-white/5"
-              >
-                <h2
-                  className={`text-2xl font-bold mb-4 font-['Ubuntu'] ${panel.titleClass}`}
-                >
-                  {panel.title}
-                </h2>
-                <ul className="space-y-3 text-gray-300">
-                  {panel.items.map((item, j) => (
-                    <li key={j} className="flex gap-3 items-start">
-                      <span className={`${panel.markerClass} mt-1 shrink-0`}>
-                        -
-                      </span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+  // Wide screenshots: the first runs full width, the rest pair up beneath it.
+  const [first, ...rest] = section.images;
+  return (
+    <Row title={section.title}>
+      <div className="grid gap-6 sm:gap-8">
+        <Reveal>
+          <Shot image={first} className={section.variant === "code" ? "bg-[#1e1e1e]" : ""} />
+        </Reveal>
+        {rest.length > 0 && (
+          <div className="grid items-start gap-6 sm:grid-cols-2 sm:gap-8">
+            {rest.map((img, i) => (
+              <Reveal key={i} delay={i * 60}>
+                <Shot image={img} />
+              </Reveal>
             ))}
           </div>
-        </section>
-      );
-
-    default:
-      return null;
-  }
+        )}
+      </div>
+    </Row>
+  );
 };
 
+const Stack = ({ section }) => (
+  <Row title="Stack">
+    <ul className="flex flex-wrap gap-x-2 gap-y-2 font-mono text-[13px]">
+      {section.items.map((t) => (
+        <li key={t} className="rounded-[3px] border border-line px-3 py-1.5 text-muted">
+          {t}
+        </li>
+      ))}
+    </ul>
+  </Row>
+);
+
+const SECTIONS = { list: ListSection, gallery: Gallery, stack: Stack };
+
 const CaseStudyLayout = ({ project }) => {
-  const { accent } = project;
+  const index = projects.findIndex((p) => p.slug === project.slug) + 1;
+  const next = getNextProject(project.slug);
+
+  const meta = [
+    ["Role", project.role],
+    ["Platforms", project.platforms],
+    [project.status ? "Status" : "Type", project.status || project.category],
+    ...(project.period ? [["Period", project.period]] : []),
+  ];
 
   return (
-    <div
-      id={project.slug}
-      className="min-h-screen text-white font-['Montserrat'] bg-[#0f0a2a] pb-16"
-    >
-      {/* Back Navigation */}
-      <div className="w-full max-w-7xl mx-auto px-6 pt-6">
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors font-['Ubuntu'] text-sm group"
-        >
-          <ArrowLeft
-            size={16}
-            className="group-hover:-translate-x-1 transition-transform"
-          />
-          Back to Home
-        </Link>
-      </div>
-
-      {/* Hero */}
-      <section className="flex flex-col items-center py-16 px-6">
-        <div
-          className={`mb-4 px-4 py-1.5 rounded-full border text-xs font-semibold tracking-wider uppercase flex items-center gap-2 ${accent.badge}`}
-        >
-          {project.status && (
-            <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse"></span>
-          )}
-          {project.status || "Case Study"}
-        </div>
-        <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center font-['Ubuntu']">
-          {project.title}
-        </h1>
-        <p className="text-lg md:text-xl mb-10 text-center max-w-2xl text-gray-300">
-          {project.tagline}
-        </p>
-
-        <div className="mb-10 relative group w-full max-w-[500px]">
-          <div
-            className={`absolute -inset-1 bg-gradient-to-r rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 ${accent.glow}`}
-          ></div>
-          {project.image ? (
-            <img
-              src={project.image}
-              alt={`${project.title} interface preview`}
-              width="1200"
-              fetchPriority="high"
-              decoding="async"
-              className="relative w-full rounded-2xl shadow-2xl border border-white/10"
-            />
-          ) : project.logo ? (
-            /* App-icon treatment, mirroring how the app appears on the store */
-            <div className="relative w-full aspect-[16/10] rounded-2xl border border-white/10 bg-[#14102e] shadow-2xl flex flex-col items-center justify-center gap-5">
-              <img
-                src={project.logo}
-                alt={`${project.title} app icon`}
-                width="512"
-                height="512"
-                fetchPriority="high"
-                decoding="async"
-                className="w-28 h-28 md:w-32 md:h-32 object-contain"
-              />
-              <span className="text-xl md:text-2xl font-bold font-['Ubuntu'] text-white/90">
-                {project.title}
-              </span>
-            </div>
-          ) : (
-            <div
-              className={`relative w-full aspect-[16/10] rounded-2xl border border-white/10 bg-gradient-to-br ${accent.glow} bg-opacity-20 flex items-center justify-center`}
+    <>
+      <SiteHeader />
+      <main id="main" tabIndex={-1} className="focus:outline-none">
+        <article aria-labelledby="case-title">
+          <header className="wrap pt-10 sm:pt-14">
+            <Link
+              to="/#work"
+              className="group inline-flex items-center gap-2 text-[14px] text-muted transition-colors hover:text-ink"
             >
-              <span className="text-3xl md:text-4xl font-bold font-['Ubuntu'] text-white/90 px-6 text-center">
-                {project.title}
-              </span>
+              <ArrowLeft
+                size={16}
+                strokeWidth={1.5}
+                aria-hidden
+                className="transition-transform group-hover:-translate-x-0.5"
+              />
+              All work
+            </Link>
+
+            <div className="rise mt-14 grid gap-y-8 sm:mt-20 lg:grid-cols-12 lg:gap-x-10">
+              <p className="label flex gap-4 text-subtle lg:col-span-3 lg:pt-5">
+                <span>
+                  {pad(index)} / {pad(projects.length)}
+                </span>
+                <span>{project.category}</span>
+              </p>
+              <div className="lg:col-span-9">
+                <h1 id="case-title" className="display text-[clamp(3rem,9vw,8.5rem)]">
+                  {project.title}
+                </h1>
+                <p className="mt-8 max-w-[34ch] font-serif text-[clamp(1.375rem,2.4vw,2rem)] leading-[1.3] tracking-[-0.01em] text-muted">
+                  {project.tagline}
+                </p>
+              </div>
             </div>
-          )}
-        </div>
 
-        <div className="flex flex-wrap justify-center gap-4">
-          {project.links.map((link) => {
-            const Icon = ICONS[link.icon] || ExternalLink;
-            return (
-              <a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-bold transition-all text-sm ${
-                  LINK_STYLES[link.style] || LINK_STYLES.outline
-                }`}
-              >
-                <Icon size={18} /> {link.label}
-              </a>
-            );
-          })}
-        </div>
-      </section>
+            <div className="rise mt-14 grid gap-y-8 [animation-delay:120ms] lg:grid-cols-12 lg:gap-x-10">
+              <dl className="grid grid-cols-1 gap-x-10 border-t border-line sm:grid-cols-2 lg:col-span-9 lg:col-start-4 lg:grid-cols-4">
+                {meta.map(([k, v]) => (
+                  <div key={k} className="border-b border-line py-4 lg:border-b-0">
+                    <dt className="label text-subtle">{k}</dt>
+                    <dd className="mt-2 text-[15px] leading-snug">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+              <ul className="flex flex-wrap gap-x-7 gap-y-3 lg:col-span-9 lg:col-start-4">
+                {project.links.map((l) => (
+                  <li key={l.href}>
+                    <ArrowLink href={l.href}>{l.label}</ArrowLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </header>
 
-      {/* Overview */}
-      <section className="max-w-4xl mx-auto py-10 px-6">
-        <h2
-          className={`text-3xl font-bold mb-6 border-l-4 pl-4 font-['Ubuntu'] ${accent.bar}`}
-        >
-          Project Overview
-        </h2>
-        <p className="text-gray-300 text-lg leading-relaxed">
-          {project.overview}
-        </p>
-      </section>
+          <div className="wrap rise mt-16 [animation-delay:200ms] sm:mt-20">
+            <Shot
+              image={project.cover}
+              eager
+              sizes="(min-width: 1440px) 1340px, 100vw"
+            />
+          </div>
 
-      {project.sections.map((section, i) => (
-        <Section key={i} section={section} accent={accent} />
-      ))}
+          <div className="wrap mt-16 sm:mt-24">
+            <section className="py-14 sm:py-20">
+              <div className="grid gap-y-8 lg:grid-cols-12 lg:gap-x-10">
+                <h2 className="label pt-2 text-subtle lg:col-span-3">Overview</h2>
+                <p className="max-w-[44ch] font-serif text-[clamp(1.375rem,2.2vw,1.875rem)] leading-[1.4] tracking-[-0.01em] lg:col-span-9">
+                  {project.overview}
+                </p>
+              </div>
+            </section>
 
-      <SiteFooter />
-    </div>
+            {project.sections.map((section, i) => {
+              const Section = SECTIONS[section.type];
+              return Section ? <Section key={i} section={section} /> : null;
+            })}
+          </div>
+
+          <nav aria-label="Next project" className="mt-10 border-t border-line">
+            <Link to={`/${next.slug}`} className="group block">
+              <div className="wrap grid gap-y-4 py-16 sm:py-24 lg:grid-cols-12 lg:gap-x-10">
+                <p className="label pt-4 text-subtle lg:col-span-3">Next project</p>
+                <div className="flex items-center justify-between gap-6 lg:col-span-9">
+                  <span className="display text-[clamp(2.75rem,7vw,6.5rem)] transition-colors group-hover:text-accent">
+                    {next.title}
+                  </span>
+                  <ArrowRight
+                    strokeWidth={1}
+                    aria-hidden
+                    className="size-10 shrink-0 transition-transform duration-300 group-hover:translate-x-2 sm:size-16"
+                  />
+                </div>
+              </div>
+            </Link>
+          </nav>
+        </article>
+      </main>
+      <SiteFooter cta />
+    </>
   );
 };
 

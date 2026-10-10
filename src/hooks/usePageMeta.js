@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { SITE } from "../config/site";
 
 const setMeta = (selector, attr, value) => {
   const el = document.head.querySelector(selector);
@@ -6,13 +7,14 @@ const setMeta = (selector, attr, value) => {
 };
 
 /**
- * Keeps the document title and description in sync with the current route.
+ * Keeps the document title, description, canonical URL and robots directive
+ * in sync with the current route.
  *
  * Note: social scrapers (LinkedIn, X, Facebook) do not execute JS, so they
  * always read the static tags in index.html. Per-project link previews would
  * require prerendering or SSR.
  */
-export default function usePageMeta({ title, description, canonicalPath }) {
+export default function usePageMeta({ title, description, canonicalPath, noindex = false }) {
   useEffect(() => {
     if (title) {
       document.title = title;
@@ -27,9 +29,12 @@ export default function usePageMeta({ title, description, canonicalPath }) {
     }
 
     if (canonicalPath) {
-      const url = new URL(canonicalPath, window.location.origin).href;
+      // Always the production origin, so previews and local builds agree.
+      const url = new URL(canonicalPath, SITE.url).href;
       setMeta('link[rel="canonical"]', "href", url);
       setMeta('meta[property="og:url"]', "content", url);
     }
-  }, [title, description, canonicalPath]);
+
+    setMeta('meta[name="robots"]', "content", noindex ? "noindex" : "index, follow");
+  }, [title, description, canonicalPath, noindex]);
 }

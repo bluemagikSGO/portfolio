@@ -1,0 +1,170 @@
+@import "@fontsource-variable/newsreader/opsz.css";
+@import "@fontsource-variable/newsreader/wght-italic.css";
+@import "@fontsource-variable/schibsted-grotesk/wght.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Newsreader Variable", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Schibsted Grotesk Variable", ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Warm paper and ink, with a single vermilion accent. Every text pairing
+     here clears WCAG AA (4.5:1) against the surface it is used on. */
+  --color-paper: #f4f1ea;
+  --color-paper-2: #ebe7dd;
+  --color-ink: #16140f;
+  --color-ink-2: #211e18;
+  --color-muted: #57534a;
+  --color-subtle: #736d62;
+  --color-line: #dad4c7;
+  --color-line-strong: #bdb6a7;
+  --color-accent: #b5401a;
+
+  /* Counterparts for the dark (ink) sections. */
+  --color-on-ink: #f4f1ea;
+  --color-on-ink-muted: #b3ada1;
+  --color-on-ink-subtle: #958f83;
+  --color-on-ink-line: #36322b;
+  --color-accent-on-ink: #f07a4e;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    font-feature-settings: "ss01", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .on-ink :focus-visible {
+    outline-color: var(--color-accent-on-ink);
+  }
+
+  /* Keep the footer at the bottom of short pages. */
+  #root {
+    display: flex;
+    min-height: 100vh;
+    min-height: 100dvh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  /* Page gutters and max width, shared by every section. */
+  .wrap {
+    @apply mx-auto w-full max-w-[90rem] px-5 sm:px-8 lg:px-12;
+  }
+
+  /* Large serif headings. Optical size follows the rendered size. */
+  .display {
+    @apply font-serif font-normal tracking-[-0.025em];
+    font-optical-sizing: auto;
+    line-height: 0.98;
+  }
+
+  .heading {
+    @apply font-serif font-normal tracking-[-0.018em];
+    font-optical-sizing: auto;
+    line-height: 1.08;
+  }
+
+  /* Small monospaced labels: section numbers, metadata keys. */
+  .label {
+    @apply font-mono text-[11px] tracking-[0.08em] uppercase;
+  }
+
+  /* Underlined inline link that shifts to the accent on hover. */
+  .link {
+    @apply underline decoration-line-strong decoration-1 underline-offset-[0.22em] transition-colors duration-200 hover:text-accent hover:decoration-accent;
+  }
+
+  .on-ink .link {
+    @apply decoration-on-ink-subtle hover:text-accent-on-ink hover:decoration-accent-on-ink;
+  }
+}
+
+/* Entrance and scroll reveals. Content is fully visible when motion is
+   reduced, and the reveal never moves more than a few pixels. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 900ms var(--ease-out-expo) both;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 900ms var(--ease-out-expo),
+    transform 900ms var(--ease-out-expo);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .rise {
+    animation: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}

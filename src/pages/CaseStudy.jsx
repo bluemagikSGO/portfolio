@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import { getProject } from "../data/projects";
 import CaseStudyLayout from "../components/CaseStudyLayout";
@@ -12,8 +11,8 @@ const CaseStudy = () => {
   usePageMeta(
     project
       ? {
-          title: `${project.title} — ${project.category} | Gabriel Steven`,
-          description: project.tagline,
+          title: `${project.title}, ${project.category} — Steven Gabriel`,
+          description: project.summary,
           canonicalPath: `/${project.slug}`,
         }
       : {}

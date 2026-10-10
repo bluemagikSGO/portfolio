@@ -1,29 +1,34 @@
-import React from "react";
+import SiteHeader from "../components/SiteHeader";
 import Hero from "../components/Hero";
+import Work from "../components/Work";
+import Studio from "../components/Studio";
 import About from "../components/About";
-import Portfolio from "../components/Portfolio";
-import Counter from "../components/Counter";
 import Testimonials from "../components/Testimonials";
-import BackToTop from "../components/BackToTop";
+import Contact from "../components/Contact";
+import SiteFooter from "../components/SiteFooter";
 import usePageMeta from "../hooks/usePageMeta";
 
 const HomePage = () => {
   usePageMeta({
-    title: "Gabriel Steven — Full-Stack Developer in Lagos",
+    title: "Steven Gabriel — Software Engineer & Founder, Lagos",
     description:
-      "Full-stack developer based in Lagos building performant websites, web apps, and mobile experiences with React, Node.js, and Supabase.",
+      "Software engineer and founder in Lagos, Nigeria. Founder of MyBabe AI and CEO of Iteminder LTD, a software studio that builds and scales apps.",
     canonicalPath: "/",
   });
 
   return (
-    <div id="homepage">
-      <Hero />
-      <About />
-      <Portfolio />
-      <Counter />
-      <Testimonials />
-      <BackToTop />
-    </div>
+    <>
+      <SiteHeader />
+      <main id="main" tabIndex={-1} className="focus:outline-none">
+        <Hero />
+        <Work />
+        <Studio />
+        <About />
+        <Testimonials />
+        <Contact />
+      </main>
+      <SiteFooter />
+    </>
   );
 };
 
